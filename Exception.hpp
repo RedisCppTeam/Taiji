@@ -20,26 +20,26 @@ using std::stringstream;
 namespace Taiji
 {
 
-enum class Eexcecode : int
+enum class Eexcecode: int
 {
 	/*基本异常*/
-	REDIS_ERR = 10, ///redis异常
-	MYSQL_ERR = 20, ///数据库异常
-	SERVER_ERR = 30, ///服务器异常
-	FILE_ERR = 40, ///文件异常
-	DATA_ERR = 50, //数值异常
-	REQUEST_ERR = 60, ///请求错误
+	REDIS_EXCEPT = 10, ///redis异常
+	MYSQL_EXCEPT = 20, ///数据库异常
+	SERVER_EXCEPT = 30, ///服务器异常
+	FILE_EXCEPT = 40, ///文件异常
+	DATA_EXCEPT = 50, //数值异常
+	REQUEST_EXCEPT = 60, ///请求错误
 
 	/*自定义派生异常*/
-	TYPE_CONVER_ERR = 51, ///类型转换错误
-	INVALID_ARG_ERR = 52, ///参数错误
-	EXCEED_MAX_ERR = 53, ///超过最大值
-	OVERFLOW_ERR = 54, ///数值溢出
-	OUT_Of_RANGE_ERR = 55, ///各种数据结构的访问越界异常
+	TYPE_CONVER_EXCEPT = 51, ///类型转换错误
+	INVALID_ARG_EXCEPT = 52, ///参数错误
+	EXCEED_MAX_EXCEPT = 53, ///超过最大值
+	OVERFLOW_EXCEPT = 54, ///数值溢出
+	OUT_Of_RANGE_EXCEPT = 55, ///各种数据结构的访问越界异常
 
-	REDIS_CONN_ERR = 11, ///redis连接异常
-	MYSQL_CONN_ERR = 21,
-	SERVER_CONN_ERR = 31,
+	REDIS_CONN_EXCEPT = 11, ///redis连接异常
+	MYSQL_CONN_EXCEPT = 21,
+	SERVER_CONN_EXCEPT = 31,
 };
 
 class Exception: public std::exception
@@ -52,17 +52,17 @@ public:
 
 	}
 
-	~Exception( ) throw ( )
+	~Exception( ) noexcept
 	{
 
 	}
 
-	virtual const char* what( ) const throw ( )
+	virtual const char* what( ) noexcept
 	{
 		return _errInfo.c_str();
 	}
 
-	const string getErrorCode( ) throw ( )
+	const string getErrorCodeString( ) noexcept
 	{
 		string errCode;
 		stringstream ss;
@@ -71,6 +71,11 @@ public:
 		ss >> errCode;
 
 		return errCode;
+	}
+
+	const int getErrorCode( )
+	{
+		return (int) _errCode;
 	}
 
 	const string getErrInfo( )
@@ -107,27 +112,27 @@ protected:
     };
 
 ///<  redis error
-NEW_EXCEPTION(RedisErr, Exception, Eexcecode::REDIS_ERR)
+NEW_EXCEPTION(ExceptRedis, Exception, Eexcecode::REDIS_EXCEPT)
 ///<  数据库连接不成功
-NEW_EXCEPTION(MysqlErr, Exception, Eexcecode::MYSQL_ERR)
+NEW_EXCEPTION(ExceptMysql, Exception, Eexcecode::MYSQL_EXCEPT)
 ///<  服务器连接超时
-NEW_EXCEPTION(ServerErr, Exception, Eexcecode::SERVER_ERR)
+NEW_EXCEPTION(ExceptServer, Exception, Eexcecode::SERVER_EXCEPT)
 ///<  配置文件不存在
-NEW_EXCEPTION(FileErr, Exception, Eexcecode::FILE_ERR)
+NEW_EXCEPTION(ExceptFile, Exception, Eexcecode::FILE_EXCEPT)
 ///<  类型转换除错
-NEW_EXCEPTION(TypeConvertErr, Exception, Eexcecode::TYPE_CONVER_ERR)
+NEW_EXCEPTION(ExceptTypeConvert, Exception, Eexcecode::TYPE_CONVER_EXCEPT)
 ///< 参数错误
-NEW_EXCEPTION(InvalidArgErr, Exception, Eexcecode::INVALID_ARG_ERR)
+NEW_EXCEPTION(ExceptInvalidArg, Exception, Eexcecode::INVALID_ARG_EXCEPT)
 ///< 超过最大值
-NEW_EXCEPTION(ExceedMaxErr, Exception, Eexcecode::EXCEED_MAX_ERR)
+NEW_EXCEPTION(ExceptExceedMax, Exception, Eexcecode::EXCEED_MAX_EXCEPT)
 ///< 各种数据结构的访问越界异常
-NEW_EXCEPTION(OutOfRangeErr, Exception, Eexcecode::OUT_Of_RANGE_ERR)
+NEW_EXCEPTION(ExceptOutOfRange, Exception, Eexcecode::OUT_Of_RANGE_EXCEPT)
 ///< 数值溢出
-NEW_EXCEPTION(OverflowErr, Exception, Eexcecode::OVERFLOW_ERR)
+NEW_EXCEPTION(ExceptOverflow, Exception, Eexcecode::OVERFLOW_EXCEPT)
 
 /**********测试自定义继承异常************/
 ///<  redis连接不成功
-NEW_EXCEPTION(RedisConnErr, RedisErr, Eexcecode::REDIS_CONN_ERR)
-NEW_EXCEPTION(MysqlConnErr, MysqlErr, Eexcecode::MYSQL_CONN_ERR)
+NEW_EXCEPTION(ExceptRedisConn, ExceptRedis, Eexcecode::REDIS_CONN_EXCEPT)
+NEW_EXCEPTION(ExceptMysqlConn, ExceptMysql, Eexcecode::MYSQL_CONN_EXCEPT)
 }
 #endif /* CEXCEPTION_H_ */
