@@ -132,6 +132,10 @@ void CLog::debug(ELogType type, const std::string&className, const std::string& 
 void CLog::debug(ELogType type, const std::string &className, const std::string &func,
                  const std::string &fmt, const Poco::Any &value1, const Poco::Any &value2)
 {
+    if( nullptr == _pLog )
+    {
+        throw ExceptNullptr( "没有初始日志对象" );
+    }
     std::string head;
     __getLogHead( type,className,func,head );
     //要在日志以前插入日志头
@@ -144,6 +148,11 @@ void CLog::debug(ELogType type, const std::string &className, const std::string 
                  const std::string &fmt, const Poco::Any &value1, const Poco::Any &value2,
                  const Poco::Any &value3)
 {
+    if( nullptr == _pLog )
+    {
+        throw ExceptNullptr( "没有初始日志对象" );
+    }
+
     std::string head;
     __getLogHead( type,className,func,head );
     //要在日志以前插入日志头
@@ -156,6 +165,11 @@ void CLog::debug(ELogType type, const std::string &className, const std::string 
                  const std::string &fmt, const Poco::Any &value1, const Poco::Any &value2,
                  const Poco::Any &value3,const Poco::Any &value4)
 {
+    if( nullptr == _pLog )
+    {
+        throw ExceptNullptr( "没有初始日志对象" );
+    }
+
     std::string head;
     __getLogHead( type,className,func,head );
     //要在日志以前插入日志头
@@ -170,6 +184,11 @@ void CLog::debug(ELogType type, const std::string &className, const std::string 
 void CLog::information(ELogType type, const std::string &className, const std::string &func,
                        const std::string &fmt, const Poco::Any &value1)
 {
+    if( nullptr == _pLog )
+    {
+        throw ExceptNullptr( "没有初始日志对象" );
+    }
+
        std::string head;
     __getLogHead( type,className,func,head );
     //要在日志以前插入日志头
@@ -181,6 +200,11 @@ void CLog::information(ELogType type, const std::string &className, const std::s
 void CLog::information(ELogType type, const std::string &className, const std::string &func,
                        const std::string &fmt, const Poco::Any &value1, const Poco::Any &value2)
 {
+    if( nullptr == _pLog )
+    {
+        throw ExceptNullptr( "没有初始日志对象" );
+    }
+
     std::string head;
     __getLogHead( type,className,func,head );
     //要在日志以前插入日志头
@@ -193,6 +217,11 @@ void CLog::information(ELogType type, const std::string &className, const std::s
                        const std::string &fmt, const Poco::Any &value1, const Poco::Any &value2,
                        const Poco::Any &value3)
 {
+    if( nullptr == _pLog )
+    {
+        throw ExceptNullptr( "没有初始日志对象" );
+    }
+
     std::string head;
     __getLogHead( type,className,func,head );
     //要在日志以前插入日志头
@@ -206,6 +235,11 @@ void CLog::information(ELogType type, const std::string &className, const std::s
                        const std::string &fmt, const Poco::Any &value1, const Poco::Any &value2,
                        const Poco::Any &value3, const Poco::Any &value4 )
 {
+    if( nullptr == _pLog )
+    {
+        throw ExceptNullptr( "没有初始日志对象" );
+    }
+
     std::string head;
     __getLogHead( type,className,func,head );
     //要在日志以前插入日志头
@@ -220,6 +254,11 @@ void CLog::information(ELogType type, const std::string &className, const std::s
 void CLog::warning(ELogType type, const std::string &className, const std::string &func,
                        const std::string &fmt, const Poco::Any &value1)
 {
+    if( nullptr == _pLog )
+    {
+        throw ExceptNullptr( "没有初始日志对象" );
+    }
+
     std::string head;
     __getLogHead( type,className,func,head );
     //要在日志以前插入日志头
@@ -233,6 +272,11 @@ void CLog::warning(ELogType type, const std::string &className, const std::strin
 void CLog::warning(ELogType type, const std::string &className, const std::string &func,
                        const std::string &fmt, const Poco::Any &value1, const Poco::Any &value2 )
 {
+    if( nullptr == _pLog )
+    {
+        throw ExceptNullptr( "没有初始日志对象" );
+    }
+
     std::string head;
     __getLogHead( type,className,func,head );
     //要在日志以前插入日志头
@@ -246,6 +290,11 @@ void CLog::warning(ELogType type, const std::string &className, const std::strin
                        const std::string &fmt, const Poco::Any &value1, const Poco::Any &value2,
                        const Poco::Any &value3 )
 {
+    if( nullptr == _pLog )
+    {
+        throw ExceptNullptr( "没有初始日志对象" );
+    }
+
     std::string head;
     __getLogHead( type,className,func,head );
     //要在日志以前插入日志头
@@ -258,6 +307,11 @@ void CLog::warning(ELogType type, const std::string &className, const std::strin
                        const std::string &fmt, const Poco::Any &value1, const Poco::Any &value2,
                        const Poco::Any &value3, const Poco::Any &value4 )
 {
+    if( nullptr == _pLog )
+    {
+        throw ExceptNullptr( "没有初始日志对象" );
+    }
+
     std::string head;
     __getLogHead( type,className,func,head );
     //要在日志以前插入日志头
@@ -272,6 +326,11 @@ void CLog::warning(ELogType type, const std::string &className, const std::strin
 void CLog::error(ELogType type, const std::string &className, const std::string &func,
                        const std::string &fmt, const Poco::Any &value1)
 {
+    if( nullptr == _pLog )
+    {
+        throw ExceptNullptr( "没有初始日志对象" );
+    }
+
     std::string head;
     __getLogHead( type,className,func,head );
     //要在日志以前插入日志头
@@ -283,6 +342,11 @@ void CLog::error(ELogType type, const std::string &className, const std::string 
 void CLog::error(ELogType type, const std::string &className, const std::string &func,
                        const std::string &fmt, const Poco::Any &value1, const Poco::Any &value2 )
 {
+    if( nullptr == _pLog )
+    {
+        throw ExceptNullptr( "没有初始日志对象" );
+    }
+
     std::string head;
     __getLogHead( type,className,func,head );
     //要在日志以前插入日志头
@@ -295,6 +359,11 @@ void CLog::error(ELogType type, const std::string &className, const std::string 
                        const std::string &fmt, const Poco::Any &value1, const Poco::Any &value2,
                        const Poco::Any &value3 )
 {
+    if( nullptr == _pLog )
+    {
+        throw ExceptNullptr( "没有初始日志对象" );
+    }
+
     std::string head;
     __getLogHead( type,className,func,head );
     //要在日志以前插入日志头
@@ -307,6 +376,11 @@ void CLog::error(ELogType type, const std::string &className, const std::string 
                        const std::string &fmt, const Poco::Any &value1, const Poco::Any &value2,
                        const Poco::Any &value3, const Poco::Any &value4 )
 {
+    if( nullptr == _pLog )
+    {
+        throw ExceptNullptr( "没有初始日志对象" );
+    }
+
     std::string head;
     __getLogHead( type,className,func,head );
     //要在日志以前插入日志头
@@ -321,6 +395,11 @@ void CLog::error(ELogType type, const std::string &className, const std::string 
 void CLog::fatal(ELogType type, const std::string &className, const std::string &func,
                        const std::string &fmt, const Poco::Any &value1)
 {
+    if( nullptr == _pLog )
+    {
+        throw ExceptNullptr( "没有初始日志对象" );
+    }
+
     std::string head;
     __getLogHead( type,className,func,head );
     //要在日志以前插入日志头
@@ -332,6 +411,11 @@ void CLog::fatal(ELogType type, const std::string &className, const std::string 
 void CLog::fatal(ELogType type, const std::string &className, const std::string &func,
                        const std::string &fmt, const Poco::Any &value1, const Poco::Any &value2 )
 {
+    if( nullptr == _pLog )
+    {
+        throw ExceptNullptr( "没有初始日志对象" );
+    }
+
     std::string head;
     __getLogHead( type,className,func,head );
     //要在日志以前插入日志头
@@ -344,6 +428,11 @@ void CLog::fatal(ELogType type, const std::string &className, const std::string 
                        const std::string &fmt, const Poco::Any &value1, const Poco::Any &value2,
                        const Poco::Any &value3 )
 {
+    if( nullptr == _pLog )
+    {
+        throw ExceptNullptr( "没有初始日志对象" );
+    }
+
     std::string head;
     __getLogHead( type,className,func,head );
     //要在日志以前插入日志头
@@ -356,6 +445,11 @@ void CLog::fatal(ELogType type, const std::string &className, const std::string 
                        const std::string &fmt, const Poco::Any &value1, const Poco::Any &value2,
                        const Poco::Any &value3, const Poco::Any &value4 )
 {
+    if( nullptr == _pLog )
+    {
+        throw ExceptNullptr( "没有初始日志对象" );
+    }
+
     std::string head;
     __getLogHead( type,className,func,head );
     //要在日志以前插入日志头
