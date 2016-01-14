@@ -161,7 +161,7 @@ public:
 
 
 private:
-    Poco::Logger* _log = nullptr; 			///< 保存 Poco::Logger 对象。
+    Poco::Logger* _pLog = nullptr; 			///< 保存 Poco::Logger 对象。
     const std::string _dir;			///< 日志路径
     const std::string _file;		///< 日志路径
     const std::string _name;	///< 日志模块的名字。

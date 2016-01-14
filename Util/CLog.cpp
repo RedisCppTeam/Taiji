@@ -25,6 +25,7 @@
 #include <Poco/AutoPtr.h>
 #include <Poco/Thread.h>
 
+#include "../common/Exception.hpp"
 
 namespace Taiji
 {
@@ -88,7 +89,7 @@ void CLog::initLog(const std::string& dir, const std::string& file, const std::s
         channel = new Poco::FormattingChannel(patternFormatter, fileChannel);
     }
     Poco::Logger::create(name,channel,Poco::Logger::parseLevel(level) );
-    _log = &Poco::Logger::get( name );
+    _pLog = &Poco::Logger::get( name );
 }
 
 
@@ -116,12 +117,16 @@ void CLog::__getLogHead( ELogType type,const std::string& className,
 void CLog::debug(ELogType type, const std::string&className, const std::string& func,
                  const std::string& fmt, const Poco::Any& value1 )
 {
+    if( nullptr == _pLog )
+    {
+        throw ExceptNullptr( "没有初始日志对象" );
+    }
     std::string head;
     __getLogHead( type,className,func,head );
     //要在日志以前插入日志头
     std::string realFmt;
     __getRealFmt( fmt, realFmt );
-    _log->debug( realFmt, head,value1 );
+    _pLog->debug( realFmt, head,value1 );
 }
 
 void CLog::debug(ELogType type, const std::string &className, const std::string &func,
@@ -132,7 +137,7 @@ void CLog::debug(ELogType type, const std::string &className, const std::string 
     //要在日志以前插入日志头
     std::string realFmt;
     __getRealFmt( fmt, realFmt );
-    _log->debug( realFmt, head,value1, value2 );
+    _pLog->debug( realFmt, head,value1, value2 );
 }
 
 void CLog::debug(ELogType type, const std::string &className, const std::string &func,
@@ -144,7 +149,7 @@ void CLog::debug(ELogType type, const std::string &className, const std::string 
     //要在日志以前插入日志头
     std::string realFmt;
     __getRealFmt( fmt, realFmt );
-    _log->debug( realFmt, head,value1, value2,value3 );
+    _pLog->debug( realFmt, head,value1, value2,value3 );
 }
 
 void CLog::debug(ELogType type, const std::string &className, const std::string &func,
@@ -156,7 +161,7 @@ void CLog::debug(ELogType type, const std::string &className, const std::string 
     //要在日志以前插入日志头
     std::string realFmt;
     __getRealFmt( fmt, realFmt );
-    _log->debug( realFmt, head,value1, value2,value3, value4 );
+    _pLog->debug( realFmt, head,value1, value2,value3, value4 );
 }
 
 
@@ -170,7 +175,7 @@ void CLog::information(ELogType type, const std::string &className, const std::s
     //要在日志以前插入日志头
     std::string realFmt;
     __getRealFmt( fmt, realFmt );
-    _log->information( realFmt, head,value1 );
+    _pLog->information( realFmt, head,value1 );
 }
 
 void CLog::information(ELogType type, const std::string &className, const std::string &func,
@@ -181,7 +186,7 @@ void CLog::information(ELogType type, const std::string &className, const std::s
     //要在日志以前插入日志头
     std::string realFmt;
     __getRealFmt( fmt, realFmt );
-    _log->information( realFmt, head,value1, value2 );
+    _pLog->information( realFmt, head,value1, value2 );
 }
 
 void CLog::information(ELogType type, const std::string &className, const std::string &func,
@@ -193,7 +198,7 @@ void CLog::information(ELogType type, const std::string &className, const std::s
     //要在日志以前插入日志头
     std::string realFmt;
     __getRealFmt( fmt, realFmt );
-    _log->information( realFmt, head,value1, value2, value3 );
+    _pLog->information( realFmt, head,value1, value2, value3 );
 }
 
 
@@ -206,7 +211,7 @@ void CLog::information(ELogType type, const std::string &className, const std::s
     //要在日志以前插入日志头
     std::string realFmt;
     __getRealFmt( fmt, realFmt );
-    _log->information( realFmt, head,value1, value2, value3, value4 );
+    _pLog->information( realFmt, head,value1, value2, value3, value4 );
 }
 
 
@@ -220,7 +225,7 @@ void CLog::warning(ELogType type, const std::string &className, const std::strin
     //要在日志以前插入日志头
     std::string realFmt;
     __getRealFmt( fmt, realFmt );
-    _log->warning( realFmt, head,value1 );
+    _pLog->warning( realFmt, head,value1 );
 }
 
 
@@ -233,7 +238,7 @@ void CLog::warning(ELogType type, const std::string &className, const std::strin
     //要在日志以前插入日志头
     std::string realFmt;
     __getRealFmt( fmt, realFmt );
-    _log->warning( realFmt, head,value1,value2 );
+    _pLog->warning( realFmt, head,value1,value2 );
 }
 
 
@@ -246,7 +251,7 @@ void CLog::warning(ELogType type, const std::string &className, const std::strin
     //要在日志以前插入日志头
     std::string realFmt;
     __getRealFmt( fmt, realFmt );
-    _log->warning( realFmt, head,value1,value2, value3 );
+    _pLog->warning( realFmt, head,value1,value2, value3 );
 }
 
 void CLog::warning(ELogType type, const std::string &className, const std::string &func,
@@ -258,7 +263,7 @@ void CLog::warning(ELogType type, const std::string &className, const std::strin
     //要在日志以前插入日志头
     std::string realFmt;
     __getRealFmt( fmt, realFmt );
-    _log->warning( realFmt, head,value1,value2, value3, value4 );
+    _pLog->warning( realFmt, head,value1,value2, value3, value4 );
 }
 
 
@@ -272,7 +277,7 @@ void CLog::error(ELogType type, const std::string &className, const std::string 
     //要在日志以前插入日志头
     std::string realFmt;
     __getRealFmt( fmt, realFmt );
-    _log->error( realFmt, head,value1 );
+    _pLog->error( realFmt, head,value1 );
 }
 
 void CLog::error(ELogType type, const std::string &className, const std::string &func,
@@ -283,7 +288,7 @@ void CLog::error(ELogType type, const std::string &className, const std::string 
     //要在日志以前插入日志头
     std::string realFmt;
     __getRealFmt( fmt, realFmt );
-    _log->error( realFmt, head,value1,value2 );
+    _pLog->error( realFmt, head,value1,value2 );
 }
 
 void CLog::error(ELogType type, const std::string &className, const std::string &func,
@@ -295,7 +300,7 @@ void CLog::error(ELogType type, const std::string &className, const std::string 
     //要在日志以前插入日志头
     std::string realFmt;
     __getRealFmt( fmt, realFmt );
-    _log->error( realFmt, head,value1,value2, value3 );
+    _pLog->error( realFmt, head,value1,value2, value3 );
 }
 
 void CLog::error(ELogType type, const std::string &className, const std::string &func,
@@ -307,7 +312,7 @@ void CLog::error(ELogType type, const std::string &className, const std::string 
     //要在日志以前插入日志头
     std::string realFmt;
     __getRealFmt( fmt, realFmt );
-    _log->error( realFmt, head,value1,value2, value3, value4 );
+    _pLog->error( realFmt, head,value1,value2, value3, value4 );
 }
 
 
@@ -321,7 +326,7 @@ void CLog::fatal(ELogType type, const std::string &className, const std::string 
     //要在日志以前插入日志头
     std::string realFmt;
     __getRealFmt( fmt, realFmt );
-    _log->fatal( realFmt, head,value1 );
+    _pLog->fatal( realFmt, head,value1 );
 }
 
 void CLog::fatal(ELogType type, const std::string &className, const std::string &func,
@@ -332,7 +337,7 @@ void CLog::fatal(ELogType type, const std::string &className, const std::string 
     //要在日志以前插入日志头
     std::string realFmt;
     __getRealFmt( fmt, realFmt );
-    _log->fatal( realFmt, head,value1,value2 );
+    _pLog->fatal( realFmt, head,value1,value2 );
 }
 
 void CLog::fatal(ELogType type, const std::string &className, const std::string &func,
@@ -344,7 +349,7 @@ void CLog::fatal(ELogType type, const std::string &className, const std::string 
     //要在日志以前插入日志头
     std::string realFmt;
     __getRealFmt( fmt, realFmt );
-    _log->fatal( realFmt, head,value1,value2, value3 );
+    _pLog->fatal( realFmt, head,value1,value2, value3 );
 }
 
 void CLog::fatal(ELogType type, const std::string &className, const std::string &func,
@@ -356,7 +361,7 @@ void CLog::fatal(ELogType type, const std::string &className, const std::string 
     //要在日志以前插入日志头
     std::string realFmt;
     __getRealFmt( fmt, realFmt );
-    _log->fatal( realFmt, head,value1,value2, value3, value4 );
+    _pLog->fatal( realFmt, head,value1,value2, value3, value4 );
 }
 
 
