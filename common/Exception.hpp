@@ -111,29 +111,29 @@ protected:
     };
 
 ///< 空指针异常
-NEW_EXCEPTION( ExceptNullptr,Exception,ExceptCode::NULLPTR_EXCEPT)
+NEW_EXCEPTION( ExceptNullptr,Exception,EExceptCode::NULLPTR_EXCEPT)
 ///<  redis error
-NEW_EXCEPTION(ExceptRedis, Exception, ExceptCode::REDIS_EXCEPT)
+NEW_EXCEPTION(ExceptRedis, Exception, EExceptCode::REDIS_EXCEPT)
 ///<  数据库连接不成功
-NEW_EXCEPTION(ExceptMysql, Exception, ExceptCode::MYSQL_EXCEPT)
+NEW_EXCEPTION(ExceptMysql, Exception, EExceptCode::MYSQL_EXCEPT)
 ///<  服务器连接超时
-NEW_EXCEPTION(ExceptServer, Exception, ExceptCode::SERVER_EXCEPT)
+NEW_EXCEPTION(ExceptServer, Exception, EExceptCode::SERVER_EXCEPT)
 ///<  配置文件不存在
-NEW_EXCEPTION(ExceptFile, Exception, ExceptCode::FILE_EXCEPT)
+NEW_EXCEPTION(ExceptFile, Exception, EExceptCode::FILE_EXCEPT)
 ///<  类型转换除错
-NEW_EXCEPTION(ExceptTypeConvert, Exception, ExceptCode::TYPE_CONVER_EXCEPT)
+NEW_EXCEPTION(ExceptTypeConvert, Exception, EExceptCode::TYPE_CONVER_EXCEPT)
 ///< 参数错误
-NEW_EXCEPTION(ExceptInvalidArg, Exception, ExceptCode::INVALID_ARG_EXCEPT)
+NEW_EXCEPTION(ExceptInvalidArg, Exception, EExceptCode::INVALID_ARG_EXCEPT)
 ///< 超过最大值
-NEW_EXCEPTION(ExceptExceedMax, Exception, ExceptCode::EXCEED_MAX_EXCEPT)
+NEW_EXCEPTION(ExceptExceedMax, Exception, EExceptCode::EXCEED_MAX_EXCEPT)
 ///< 各种数据结构的访问越界异常
-NEW_EXCEPTION(ExceptOutOfRange, Exception, ExceptCode::OUT_Of_RANGE_EXCEPT)
+NEW_EXCEPTION(ExceptOutOfRange, Exception, EExceptCode::OUT_Of_RANGE_EXCEPT)
 ///< 数值溢出
-NEW_EXCEPTION(ExceptOverflow, Exception, ExceptCode::OVERFLOW_EXCEPT)
+NEW_EXCEPTION(ExceptOverflow, Exception, EExceptCode::OVERFLOW_EXCEPT)
 
 /**********测试自定义继承异常************/
 ///<  redis连接不成功
-NEW_EXCEPTION(ExceptRedisConn, ExceptRedis, ExceptCode::REDIS_CONN_EXCEPT)
-NEW_EXCEPTION(ExceptMysqlConn, ExceptMysql, ExceptCode::MYSQL_CONN_EXCEPT)
+NEW_EXCEPTION(ExceptRedisConn, ExceptRedis, EExceptCode::REDIS_CONN_EXCEPT)
+NEW_EXCEPTION(ExceptMysqlConn, ExceptMysql, EExceptCode::MYSQL_CONN_EXCEPT)
 }
 #endif /* CEXCEPTION_H_ */

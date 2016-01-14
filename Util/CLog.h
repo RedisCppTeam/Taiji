@@ -50,6 +50,7 @@ class CLog
 {
 public:
     CLog( ) = default;
+    ~CLog( ) = default;
     /**
      * @brief 构造一个可用日志
      * @param dir 日志文件的路径，如果日志路径不存在的话，会自动创建
