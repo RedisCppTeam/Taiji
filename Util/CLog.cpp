@@ -1,4 +1,4 @@
-/**
+﻿/**
 * Copyright (c) 2015, 爱wifi（版权声明）
 *
 * @file CLog.cpp
@@ -113,6 +113,22 @@ void CLog::__getLogHead( ELogType type,const std::string& className,
     std::cout << head << std::endl;
 }
 
+void CLog::debug(ELogType type, const std::string&className, const std::string& func,
+                 const std::string& fmt )
+{
+    if( nullptr == _pLog )
+    {
+        throw ExceptNullptr( "没有初始日志对象" );
+    }
+    std::string head;
+    __getLogHead( type,className,func,head );
+    //要在日志以前插入日志头
+    std::string realFmt;
+    __getRealFmt( fmt, realFmt );
+    _pLog->debug( realFmt, head );
+}
+
+
 
 void CLog::debug(ELogType type, const std::string&className, const std::string& func,
                  const std::string& fmt, const Poco::Any& value1 )
@@ -181,6 +197,22 @@ void CLog::debug(ELogType type, const std::string &className, const std::string 
 
 
 /////////////////////////////////////////// information //////////////////////////////////////////////////
+void CLog::information(ELogType type, const std::string &className, const std::string &func,
+                       const std::string &fmt )
+{
+    if( nullptr == _pLog )
+    {
+        throw ExceptNullptr( "没有初始日志对象" );
+    }
+
+       std::string head;
+    __getLogHead( type,className,func,head );
+    //要在日志以前插入日志头
+    std::string realFmt;
+    __getRealFmt( fmt, realFmt );
+    _pLog->information( realFmt, head );
+}
+
 void CLog::information(ELogType type, const std::string &className, const std::string &func,
                        const std::string &fmt, const Poco::Any &value1)
 {
@@ -251,6 +283,23 @@ void CLog::information(ELogType type, const std::string &className, const std::s
 
 
 /////////////////////////////////////////////// warning ///////////////////////////////////////////////
+void CLog::warning(ELogType type, const std::string &className, const std::string &func,
+                       const std::string &fmt )
+{
+    if( nullptr == _pLog )
+    {
+        throw ExceptNullptr( "没有初始日志对象" );
+    }
+
+    std::string head;
+    __getLogHead( type,className,func,head );
+    //要在日志以前插入日志头
+    std::string realFmt;
+    __getRealFmt( fmt, realFmt );
+    _pLog->warning( realFmt, head );
+}
+
+
 void CLog::warning(ELogType type, const std::string &className, const std::string &func,
                        const std::string &fmt, const Poco::Any &value1)
 {
@@ -324,6 +373,22 @@ void CLog::warning(ELogType type, const std::string &className, const std::strin
 
 /////////////////////////////////////////////// error ///////////////////////////////////////////////
 void CLog::error(ELogType type, const std::string &className, const std::string &func,
+                       const std::string &fmt )
+{
+    if( nullptr == _pLog )
+    {
+        throw ExceptNullptr( "没有初始日志对象" );
+    }
+
+    std::string head;
+    __getLogHead( type,className,func,head );
+    //要在日志以前插入日志头
+    std::string realFmt;
+    __getRealFmt( fmt, realFmt );
+    _pLog->error( realFmt, head );
+}
+
+void CLog::error(ELogType type, const std::string &className, const std::string &func,
                        const std::string &fmt, const Poco::Any &value1)
 {
     if( nullptr == _pLog )
@@ -392,6 +457,22 @@ void CLog::error(ELogType type, const std::string &className, const std::string 
 
 
 /////////////////////////////////////////////// fatal ///////////////////////////////////////////////
+void CLog::fatal(ELogType type, const std::string &className, const std::string &func,
+                       const std::string &fmt )
+{
+    if( nullptr == _pLog )
+    {
+        throw ExceptNullptr( "没有初始日志对象" );
+    }
+
+    std::string head;
+    __getLogHead( type,className,func,head );
+    //要在日志以前插入日志头
+    std::string realFmt;
+    __getRealFmt( fmt, realFmt );
+    _pLog->fatal( realFmt, head );
+}
+
 void CLog::fatal(ELogType type, const std::string &className, const std::string &func,
                        const std::string &fmt, const Poco::Any &value1)
 {

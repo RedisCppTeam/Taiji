@@ -90,6 +90,9 @@ public:
                  const std::string& purgeAge=DEFAULT_LOG_PURGEAGE );
 
     void debug(ELogType type, const std::string&className, const std::string& func,
+                const std::string& fmt );
+
+    void debug(ELogType type, const std::string&className, const std::string& func,
                 const std::string& fmt, const Poco::Any& value1 );
 
     void debug( ELogType type,const std::string&className,const std::string& func,
@@ -104,6 +107,8 @@ public:
                const Poco::Any& value3,const Poco::Any& value4 );
 
 
+    void information(ELogType type, const std::string&className, const std::string& func,
+               const std::string& fmt );
 
     void information(ELogType type, const std::string&className, const std::string& func,
                const std::string& fmt, const Poco::Any& value1 );
@@ -122,6 +127,9 @@ public:
 
 
     void warning(ELogType type, const std::string&className, const std::string& func,
+               const std::string& fmt );
+
+    void warning(ELogType type, const std::string&className, const std::string& func,
                const std::string& fmt, const Poco::Any& value1 );
 
     void warning( ELogType type,const std::string&className,const std::string& func,
@@ -138,6 +146,9 @@ public:
 
 
     void error(ELogType type, const std::string&className, const std::string& func,
+               const std::string& fmt );
+
+    void error(ELogType type, const std::string&className, const std::string& func,
                const std::string& fmt, const Poco::Any& value1 );
 
     void error( ELogType type,const std::string&className,const std::string& func,
@@ -152,6 +163,9 @@ public:
                const Poco::Any& value3,const Poco::Any& value4 );
 
 
+
+    void fatal(ELogType type, const std::string&className, const std::string& func,
+               const std::string& fmt );
 
     void fatal(ELogType type, const std::string&className, const std::string& func,
                const std::string& fmt, const Poco::Any& value1 );
