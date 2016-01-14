@@ -71,6 +71,7 @@ public:
      * @return 返回日志对象的引用
      *
      * eg: CLog& log = CUtil::instance().getLog();
+     * @warning 找不到会抛出 ExceptionNotFindLog 异常
      */
     CLog& getLog( const std::string &logName );
 

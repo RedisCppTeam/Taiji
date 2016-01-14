@@ -11,6 +11,7 @@
 #include "CUtil.h"
 #include <sstream>
 #include <Poco/Data/MySQL/Connector.h>
+#include <string>
 
 namespace  Taiji {
 
@@ -37,7 +38,7 @@ void CUtil::createLog(const std::string &dir, const std::string &file, const std
 CLog &CUtil::getLog(const std::string &logName )
 {
     auto itLog = _logMap.find( logName );
-    if ( itLog == std::map::end() )
+    if ( itLog == _logMap.end() )
     {
         throw ExceptionNotFindLog("not find Clog object" );
     }
