@@ -29,9 +29,9 @@ CUtil &CUtil::instance()
 }
 
 void CUtil::createLog(const std::string &dir, const std::string &file, const std::string &name,
-                      const std::string &level, const std::string &rotation, const std::string &purgeage)
+                      const std::string &level, const std::string &rotation, const std::string &purgeAge)
 {
-    std::shared_ptr<CLog> pLog( new CLog( dir, file, name, level, rotation, purgeage) );
+    std::shared_ptr<CLog> pLog( new CLog( dir, file, name, level, rotation, purgeAge) );
     _logMap.insert( std::pair<std::string,std::shared_ptr<CLog>>( name, pLog ) );
 }
 

@@ -19,7 +19,7 @@
 #include <memory>
 #include <string>
 #include <map>
-#include "../common/Exception.hpp"
+#include "Exception.hpp"
 
 namespace Taiji {
 
@@ -64,7 +64,7 @@ public:
     void createLog( const std::string &dir, const std::string &file, const std::string &name,
                     const std::string &level=CLog::DEFAULT_LOG_LEVEL,
                     const std::string &rotation=CLog::DEFAULT_LOG_ROTATION,
-                    const std::string& purgeage=CLog::DEFAULT_LOG_PURGEAGE );
+                    const std::string& purgeAge=CLog::DEFAULT_LOG_PURGEAGE );
 
     /**
      * @brief getLog

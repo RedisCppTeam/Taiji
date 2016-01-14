@@ -25,7 +25,7 @@
 #include <Poco/AutoPtr.h>
 #include <Poco/Thread.h>
 
-#include "../common/Exception.hpp"
+#include "Exception.hpp"
 
 namespace Taiji
 {
@@ -39,15 +39,15 @@ const std::string CLog::DEFAULT_LOG_LEVEL			=		"information";
 
 
 CLog::CLog(const std::string& dir, const std::string& file, const std::string& name ,
-           const std::string &level , const std::string &rotation, const std::string &purgeage):
-    _dir( dir ),_file( file ),_name( name ),_level( level ),_rotation( rotation),_purgeage( purgeage )
+           const std::string &level , const std::string &rotation, const std::string &purgeAge):
+    _dir( dir ),_file( file ),_name( name ),_level( level ),_rotation( rotation),_purgeAge( purgeAge )
 {
-    initLog( _dir, _file, _name, _level, _rotation,_purgeage );
+    initLog( _dir, _file, _name, _level, _rotation,_purgeAge );
 }
 
 
 void CLog::initLog(const std::string& dir, const std::string& file, const std::string& name ,
-                   const std::string &level , const std::string &rotation, const std::string &purgeage)
+                   const std::string &level , const std::string &rotation, const std::string &purgeAge)
 {
     using Poco::FileChannel;
     //检查当前目录下是否有log目录，否则创建一个
@@ -78,7 +78,7 @@ void CLog::initLog(const std::string& dir, const std::string& file, const std::s
         fileChannel->setProperty(FileChannel::PROP_FLUSH,"true");
         //删除过期的日志文件,格式为 "基数 单位" 支持的单位为 minutes, hours,days,weeks,months,
         //基数是可选的。默认为1
-        fileChannel->setProperty(FileChannel::PROP_PURGEAGE, purgeage );
+        fileChannel->setProperty(FileChannel::PROP_PURGEAGE, purgeAge );
 
         //每条日志的格式。
         Poco::AutoPtr<Poco::PatternFormatter> patternFormatter(

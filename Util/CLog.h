@@ -71,7 +71,7 @@ public:
     CLog(const std::string &dir, const std::string &file, const std::string &name,
          const std::string &level=DEFAULT_LOG_LEVEL,
          const std::string &rotation=DEFAULT_LOG_ROTATION,
-         const std::string& purgeage=DEFAULT_LOG_PURGEAGE);
+         const std::string& purgeAge=DEFAULT_LOG_PURGEAGE);
     CLog( CLog& ) = delete;
     CLog& operator ==( const CLog& ) = delete;
 
@@ -87,7 +87,7 @@ public:
     void initLog(const std::string &dir, const std::string &file, const std::string &name,
                  const std::string &level=DEFAULT_LOG_LEVEL,
                  const std::string &rotation=DEFAULT_LOG_ROTATION,
-                 const std::string& purgeage=DEFAULT_LOG_PURGEAGE );
+                 const std::string& purgeAge=DEFAULT_LOG_PURGEAGE );
 
     void debug(ELogType type, const std::string&className, const std::string& func,
                 const std::string& fmt, const Poco::Any& value1 );
@@ -176,7 +176,7 @@ private:
     const std::string _name;	///< 日志模块的名字。
     const std::string _level; 		///< 日志级别
     const std::string _rotation;///< 日志 rotation
-    const std::string _purgeage;///< 日志的删除周期
+    const std::string _purgeAge;///< 日志的删除周期
 
     //内部函数
 
