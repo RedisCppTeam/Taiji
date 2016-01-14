@@ -16,9 +16,16 @@
 #include <CRedisPool.h>
 #include <memory>
 #include <iostream>
+#include <memory>
+#include <string>
+#include <map>
+#include "../common/Exception.hpp"
 
 namespace Taiji {
 
+NEW_EXCEPTION( ExceptionLog, Exception,EExceptCode::NO_EXCEPT_CODE )
+///< 找不到想要的日志对象异常
+NEW_EXCEPTION( ExceptionNotFindLog, Exception,EExceptCode::NO_EXCEPT_CODE )
 
 
 
@@ -54,7 +61,10 @@ public:
      *                 notice information	 debug	 trace
      * @return None
      */
-    void initLog( const std::string &dir, const std::string &file, const std::string &name, const std::string &level );
+    void createLog( const std::string &dir, const std::string &file, const std::string &name,
+                    const std::string &level=CLog::DEFAULT_LOG_LEVEL,
+                    const std::string &rotation=CLog::DEFAULT_LOG_ROTATION,
+                    const std::string& purgeage=CLog::DEFAULT_LOG_PURGEAGE );
 
     /**
      * @brief getLog
@@ -62,7 +72,7 @@ public:
      *
      * eg: CLog& log = CUtil::instance().getLog();
      */
-    CLog& getLog( void );
+    CLog& getLog( const std::string &logName );
 
 
 
@@ -112,6 +122,7 @@ private:
     CUtil() = default;
     CRedisPool _redisPool;
     CLog _log;
+    std::map<std::string,std::shared_ptr<CLog>> _logMap;
     std::shared_ptr<Poco::Data::SessionPool> _pSessionPool;
 
 

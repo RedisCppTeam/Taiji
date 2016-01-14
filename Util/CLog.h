@@ -48,6 +48,14 @@ enum class ELogType
  */
 class CLog
 {
+
+public:
+    //以下为字符串常量
+    static const  std::string HEAD_FMT;									///< 默认的是日志头格式
+    static const  std::string DEFAULT_LOG_ROTATION; 		///< 默认的日志文件更新时间
+    static const  std::string DEFAULT_LOG_PURGEAGE;		///< 默认的日志文件保留时间
+    static const  std::string DEFAULT_LOG_LEVEL;				///< 默认的日志输出等级
+
 public:
     CLog( ) = default;
     ~CLog( ) = default;
@@ -185,11 +193,6 @@ private:
        realFmt += fmt;
     }
 
-    //以下为字符串常量
-    static const  std::string HEAD_FMT;									///< 默认的是日志头格式
-    static const  std::string DEFAULT_LOG_ROTATION; 		///< 默认的日志文件更新时间
-    static const  std::string DEFAULT_LOG_PURGEAGE;		///< 默认的日志文件保留时间
-    static const  std::string DEFAULT_LOG_LEVEL;				///< 默认的日志输出等级
 };
 
 

@@ -27,14 +27,21 @@ CUtil &CUtil::instance()
     return singleton;
 }
 
-void CUtil::initLog(const std::string &dir, const std::string &file, const std::string &name, const std::string &level)
+void CUtil::createLog(const std::string &dir, const std::string &file, const std::string &name,
+                      const std::string &level, const std::string &rotation, const std::string &purgeage)
 {
-    _log.initLog( dir, file, name, level );
+    std::shared_ptr<CLog> pLog( new CLog( dir, file, name, level, rotation, purgeage) );
+    _logMap.insert( std::pair<std::string,std::shared_ptr<CLog>>( name, pLog ) );
 }
 
-CLog &CUtil::getLog()
+CLog &CUtil::getLog(const std::string &logName )
 {
-    return _log;
+    auto itLog = _logMap.find( logName );
+    if ( itLog == std::map::end() )
+    {
+        throw ExceptionNotFindLog("not find Clog object" );
+    }
+    return *(itLog->second);
 }
 
 void CUtil::initMysql( const string& host, uint16_t port, const string& user, const string&pass,

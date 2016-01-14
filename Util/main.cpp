@@ -40,11 +40,11 @@ void TestMysql()
 
 void TestLog( void )
 {
-    CUtil::instance().initLog("./log/","test.log","Test","debug" );
-    CLog& pLog = CUtil::instance().getLog();
-    pLog.debug( ELogType::SEND,"main","main_f","%s  %s", string( "test1") ,string( "test2") );
-    pLog.fatal( ELogType::SEND,"main","main_f","%s  %s %s", string( "error"), string("dsadsa"),string("123") );
-}
+   CUtil::instance().createLog("./log/","test.log","Test2","debug" );
+   CUtil::instance().createLog("./log/","test.log","Test","debug" );
+    CLog& log = CUtil::instance().getLog( "Test3" );
+    log.debug( ELogType::SEND,"main","main_f","%s  %s", string( "test1") ,string( "test2") );
+ }
 
 void TestRedis( void )
 {

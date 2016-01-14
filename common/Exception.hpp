@@ -20,6 +20,8 @@ namespace Taiji
 
 enum class EExceptCode: int
 {
+        /*没有异常编号*/
+        NO_EXCEPT_CODE = 0,	///< 没有异常编号
 	/*基本异常*/
         REDIS_EXCEPT = 10, 	///< redis异常
         MYSQL_EXCEPT = 20, 	///< 数据库异常
@@ -28,7 +30,7 @@ enum class EExceptCode: int
         DATA_EXCEPT = 50, 	///< 数值异常
         REQUEST_EXCEPT = 60, ///< 请求错误
 
-	/*自定义派生异常*/
+        /*数值的派生异常*/
         TYPE_CONVER_EXCEPT = 51, 	///<类型转换错误
         INVALID_ARG_EXCEPT = 52, 		///<参数错误
         EXCEED_MAX_EXCEPT = 53, 		///<超过最大值
@@ -36,8 +38,13 @@ enum class EExceptCode: int
         OUT_Of_RANGE_EXCEPT = 55, 	///<各种数据结构的访问越界异常
         NULLPTR_EXCEPT = 56,			///< 空指针异常
 
+        /*redis 的派生类异常*/
         REDIS_CONN_EXCEPT = 11, 		///< redis连接异常
+
+        /*mysql 的派生类异常*/
         MYSQL_CONN_EXCEPT = 21,		///< mysql 链接异常
+
+        /*服务的派生类异常*/
         SERVER_CONN_EXCEPT = 31,	///< 服务器链接异常
 };
 
@@ -110,8 +117,7 @@ protected:
             }\
     };
 
-///< 空指针异常
-NEW_EXCEPTION( ExceptNullptr,Exception,EExceptCode::NULLPTR_EXCEPT)
+/******************基类异常*********************/
 ///<  redis error
 NEW_EXCEPTION(ExceptRedis, Exception, EExceptCode::REDIS_EXCEPT)
 ///<  数据库连接不成功
@@ -120,6 +126,7 @@ NEW_EXCEPTION(ExceptMysql, Exception, EExceptCode::MYSQL_EXCEPT)
 NEW_EXCEPTION(ExceptServer, Exception, EExceptCode::SERVER_EXCEPT)
 ///<  配置文件不存在
 NEW_EXCEPTION(ExceptFile, Exception, EExceptCode::FILE_EXCEPT)
+/******************数据的派生类异常*******************/
 ///<  类型转换除错
 NEW_EXCEPTION(ExceptTypeConvert, Exception, EExceptCode::TYPE_CONVER_EXCEPT)
 ///< 参数错误
@@ -130,10 +137,13 @@ NEW_EXCEPTION(ExceptExceedMax, Exception, EExceptCode::EXCEED_MAX_EXCEPT)
 NEW_EXCEPTION(ExceptOutOfRange, Exception, EExceptCode::OUT_Of_RANGE_EXCEPT)
 ///< 数值溢出
 NEW_EXCEPTION(ExceptOverflow, Exception, EExceptCode::OVERFLOW_EXCEPT)
+///< 空指针异常
+NEW_EXCEPTION(ExceptNullptr,Exception,EExceptCode::NULLPTR_EXCEPT)
 
-/**********测试自定义继承异常************/
+/********** redis 派生类异常************/
 ///<  redis连接不成功
 NEW_EXCEPTION(ExceptRedisConn, ExceptRedis, EExceptCode::REDIS_CONN_EXCEPT)
+/*********** mysql 的派生类异常 ********************/
 NEW_EXCEPTION(ExceptMysqlConn, ExceptMysql, EExceptCode::MYSQL_CONN_EXCEPT)
 }
 #endif /* CEXCEPTION_H_ */
