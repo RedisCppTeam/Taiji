@@ -50,16 +50,14 @@ void TestLog( void )
 void TestRedis( void )
 {
     CUtil::instance().initRedis( "127.0.0.1",6379, 100 );
-    int place;
-    CRedisClient* redis = CUtil::instance().getRedis( place, 1000 );
+    std::shared_ptr<CRedisClient> predis  = CUtil::instance().getRedis( 1000 );
     CRedisClient::VecString vals;
-    redis->keys( "*", vals );
+    predis->keys( "*", vals );
 
     for ( auto &it : vals )
     {
         std::cout << it << std::endl;
     }
-    CUtil::instance().putBackRedis( place );
 }
 
 

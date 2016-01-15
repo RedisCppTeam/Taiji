@@ -112,13 +112,8 @@ public:
      * @param millisecond　如果所有链接都忙的话那么允许等待的最大的秒数。
      * @return 	返回一个可用的链接对象地址。
      */
-    CRedisClient *getRedis(int32_t &place, long millisecond);
+     CRedisPool::Handle getRedis(long millisecond );
 
-    /**
-     * @brief putBackRedis 把　CRedisClient 对象放回链接池。
-     * @param place 要放回的链接所在的位置。
-     */
-    void putBackRedis(int32_t place);
 private:
     CUtil() = default;
     CRedisPool _redisPool;

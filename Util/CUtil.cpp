@@ -84,16 +84,20 @@ void CUtil::__uninitRedis()
     _redisPool.closeConnPool();
 }
 
-CRedisClient *CUtil::getRedis(int32_t &place, long millisecond)
+CRedisPool::Handle CUtil::getRedis( long millisecond )
 {
-    return _redisPool.getConn( place,millisecond );
+    int32_t place = -1;
+     CRedisClient* predis = _redisPool.getConn( place,millisecond );
+     //智能指针的析构器。把 redis 对象 putBack() 回去。
+     auto deleter = [ place,this ]( CRedisClient * pConn )
+     {
+         if( place >= 0 && nullptr != pConn  )
+         {
+             this->_redisPool.pushBackConn( place );
+         }
+     };
+     return CRedisPool::Handle( predis,deleter );
 }
-
-void CUtil::putBackRedis(int32_t place)
-{
-    _redisPool.pushBackConn( place );
-}
-
 
 
 } //namespace Taiji
