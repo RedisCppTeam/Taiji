@@ -142,8 +142,12 @@ TAIJI_NEW_EXCEPTION(ExceptData, ExceptRuntime, 70)
 ///< 内存不足
 TAIJI_NEW_EXCEPTION(ExceptOutOfMemory, ExceptRuntime, 80)
 
+
+
+/******************服务器异常*************************/
 ///<  服务器链接异常
 TAIJI_NEW_EXCEPTION(ExceptServerConn, ExceptServer, 90)
+
 
 /******************数据的派生类异常*******************/
 ///<  类型转换除错
