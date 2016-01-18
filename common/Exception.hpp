@@ -124,34 +124,29 @@ TAIJI_NEW_EXCEPTION(ExceptRedisConn, ExceptRedis, 10)
 
 /*********** mysql 的派生类异常 ********************/
 ///<  mysql连接不成功
-TAIJI_NEW_EXCEPTION(ExceptMysqlConn, ExceptMysql, 20)
+TAIJI_NEW_EXCEPTION(ExceptMysqlConn, ExceptMysql, 10)
 
 /*********** 文件的派生类异常 ********************/
 ///<  文件创建异常
-TAIJI_NEW_EXCEPTION(ExceptCreateFile, ExceptFile, 30)
+TAIJI_NEW_EXCEPTION(ExceptCreateFile, ExceptFile, 10)
 ///<  文件打开异常
-TAIJI_NEW_EXCEPTION(ExceptOpenFile, ExceptFile, 40)
+TAIJI_NEW_EXCEPTION(ExceptOpenFile, ExceptFile, 20)
 ///<  文件写异常
-TAIJI_NEW_EXCEPTION(ExceptWriteFile, ExceptFile, 50)
+TAIJI_NEW_EXCEPTION(ExceptWriteFile, ExceptFile, 30)
 ///<  文件读异常
-TAIJI_NEW_EXCEPTION(ExceptReadFile, ExceptFile, 60)
+TAIJI_NEW_EXCEPTION(ExceptReadFile, ExceptFile, 40)
 
 /******************运行时派生类异常*******************/
 ///<  数据异常
-TAIJI_NEW_EXCEPTION(ExceptData, ExceptRuntime, 70)
+TAIJI_NEW_EXCEPTION(ExceptData, ExceptRuntime, 10)
 ///< 内存不足
-TAIJI_NEW_EXCEPTION(ExceptOutOfMemory, ExceptRuntime, 80)
-///< 日志文件异常
-TAIJI_NEW_EXCEPTION(ExceptLog, ExceptRuntime, 90)
+TAIJI_NEW_EXCEPTION(ExceptOutOfMemory, ExceptRuntime, 20)
 
-
-
-/******************服务器异常*************************/
+/******************服务器派生类异常*******************/
 ///<  服务器链接异常
-TAIJI_NEW_EXCEPTION(ExceptServerConn, ExceptServer, 90)
+TAIJI_NEW_EXCEPTION(ExceptServerConn, ExceptServer, 10)
 
-
-/******************数据的派生类异常*******************/
+/******************数据的派生类异常(第三层)*******************/
 ///<  类型转换除错
 TAIJI_NEW_EXCEPTION(ExceptTypeConvert, ExceptData, 1)
 ///< 参数错误
