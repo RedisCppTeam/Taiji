@@ -141,6 +141,8 @@ TAIJI_NEW_EXCEPTION(ExceptReadFile, ExceptFile, 60)
 TAIJI_NEW_EXCEPTION(ExceptData, ExceptRuntime, 70)
 ///< 内存不足
 TAIJI_NEW_EXCEPTION(ExceptOutOfMemory, ExceptRuntime, 80)
+///< 日志文件异常
+TAIJI_NEW_EXCEPTION(ExceptLog, ExceptRuntime, 90)
 
 
 
