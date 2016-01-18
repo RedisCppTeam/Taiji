@@ -23,9 +23,8 @@
 
 namespace Taiji {
 
-NEW_EXCEPTION( ExceptionLog, Exception,EExceptCode::NO_EXCEPT_CODE )
 ///< 找不到想要的日志对象异常
-NEW_EXCEPTION( ExceptionNotFindLog, Exception,EExceptCode::NO_EXCEPT_CODE )
+TAIJI_NEW_EXCEPTION( ExceptionNotFindLog, Exception,ExceptCode::NO_EXCEPT_CODE )
 
 
 
