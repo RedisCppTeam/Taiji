@@ -110,7 +110,6 @@ void CLog::__getLogHead( ELogType type,const std::string& className,
     Poco::Thread::TID tid = Poco::Thread::currentTid();
     //获取日志头
     Poco::format( head,HEAD_FMT, stype,tid,className,func );
-    std::cout << head << std::endl;
 }
 
 void CLog::debug(ELogType type, const std::string&className, const std::string& func,
