@@ -24,8 +24,6 @@ enum class ExceptCode: int
 	/*没有异常编号*/
 	NO_EXCEPT_CODE = 0,	///< 没有异常编号
 	/*基本异常*/
-	REDIS_EXCEPT = 100, 	///< redis异常
-	MYSQL_EXCEPT = 200, 	///< 数据库异常
 	FILE_EXCEPT = 300, 		///< 文件异常
 	RUNTIME_EXCEPT = 400, ///< 运行时异常
 	SERVER_EXCEPT = 500, ///< 服务器异常
@@ -79,8 +77,8 @@ public:
 
 protected:
 	std::string _errInfo;
-	int _errCode;
-	int _inheritNum;
+	int _errCode = 0;
+	int _inheritNum = 0;
 };
 
 #define TAIJI_NEW_EXCEPTION( name,parent,code ) \
@@ -107,10 +105,6 @@ protected:
     };
 
 /******************基类异常*********************/
-///<  redis异常
-TAIJI_NEW_EXCEPTION(ExceptRedis, Exception, ExceptCode::REDIS_EXCEPT)
-///<  数据库异常
-TAIJI_NEW_EXCEPTION(ExceptMysql, Exception, ExceptCode::MYSQL_EXCEPT)
 ///<  文件异常
 TAIJI_NEW_EXCEPTION(ExceptFile, Exception, ExceptCode::FILE_EXCEPT)
 ///<  运行时异常
@@ -118,13 +112,7 @@ TAIJI_NEW_EXCEPTION(ExceptRuntime, Exception, ExceptCode::RUNTIME_EXCEPT)
 ///<  服务器异常
 TAIJI_NEW_EXCEPTION(ExceptServer, Exception, ExceptCode::SERVER_EXCEPT)
 
-/********** redis 派生类异常************/
-///<  redis连接不成功
-TAIJI_NEW_EXCEPTION(ExceptRedisConn, ExceptRedis, 10)
 
-/*********** mysql 的派生类异常 ********************/
-///<  mysql连接不成功
-TAIJI_NEW_EXCEPTION(ExceptMysqlConn, ExceptMysql, 10)
 
 /*********** 文件的派生类异常 ********************/
 ///<  文件创建异常
