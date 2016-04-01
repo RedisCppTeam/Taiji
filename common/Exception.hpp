@@ -6,7 +6,7 @@
  *
  * 此文件的详细功能描述。(可选字段)
  * ExceptCode枚举类:只列出几个基类，如果不够用，可根据需要可派生子类
- * Exception类:_inheritNum属性代表继承的次数，当继承次数大于2次时，则_errCode为第二次继承时的相反数
+ * Exception类:_inheritNum属性代表继承的次数，当继承次数大于3次时，则_errCode为第三次继承时的相反数
  * @author: 		cj
  * @date: 		2016年1月6日
  *
@@ -15,23 +15,14 @@
 #ifndef EXCEPTION_H_
 #define EXCEPTION_H_
 #include <sstream>
+#include <map>
+#include <iostream>
 
 namespace Taiji
 {
 
-enum class ExceptCode: int
-{
-	/*没有异常编号*/
-	NO_EXCEPT_CODE = 0,	///< 没有异常编号
-	/*基本异常*/
-	FILE_EXCEPT = 300, 		///< 文件异常
-	RUNTIME_EXCEPT = 400, ///< 运行时异常
-	SERVER_EXCEPT = 500, ///< 服务器异常
-};
-
 class Exception: public std::exception
 {
-
 public:
 	Exception( const std::string &pErrInfo ) :
 			_errInfo(pErrInfo)
@@ -79,6 +70,29 @@ protected:
 	std::string _errInfo;
 	int _errCode = 0;
 	int _inheritNum = 0;
+
+private:
+	friend class Util;
+	static std::map<int , std::string> _codeMap;
+};
+
+std::map<int , std::string> Exception::_codeMap;
+
+class Util
+{
+public:
+	Util( int errCode , const std::string &name )
+	{
+		std::pair<std::map<int , std::string>::const_iterator , bool> it =
+				Exception::_codeMap.insert(
+						std::map<int , std::string>::value_type(errCode,
+								name));
+		if ( !it.second )
+		{
+			std::cout <<"异常码重复，重复的是"<< it.first->second << "和"<<name<<std::endl;
+			exit(1);
+		}
+	}
 };
 
 #define TAIJI_NEW_EXCEPTION( name,parent,code ) \
@@ -102,54 +116,13 @@ protected:
             { \
                 \
             }\
+	static Util _util;\
     };
 
-/******************基类异常*********************/
-///<  文件异常
-TAIJI_NEW_EXCEPTION(ExceptFile, Exception, ExceptCode::FILE_EXCEPT)
-///<  运行时异常
-TAIJI_NEW_EXCEPTION(ExceptRuntime, Exception, ExceptCode::RUNTIME_EXCEPT)
-///<  服务器异常
-TAIJI_NEW_EXCEPTION(ExceptServer, Exception, ExceptCode::SERVER_EXCEPT)
+#define TAIJI_UTIL(errCode,exceptionName) Util exceptionName::_util(errCode,#exceptionName);
 
 
-
-/*********** 文件的派生类异常 ********************/
-///<  文件创建异常
-TAIJI_NEW_EXCEPTION(ExceptCreateFile, ExceptFile, 10)
-///<  文件打开异常
-TAIJI_NEW_EXCEPTION(ExceptOpenFile, ExceptFile, 20)
-///<  文件写异常
-TAIJI_NEW_EXCEPTION(ExceptWriteFile, ExceptFile, 30)
-///<  文件读异常
-TAIJI_NEW_EXCEPTION(ExceptReadFile, ExceptFile, 40)
-
-/******************运行时派生类异常*******************/
-///<  数据异常
-TAIJI_NEW_EXCEPTION(ExceptData, ExceptRuntime, 10)
-///< 内存不足
-TAIJI_NEW_EXCEPTION(ExceptOutOfMemory, ExceptRuntime, 20)
-
-/******************服务器派生类异常*******************/
-///<  服务器链接异常
-TAIJI_NEW_EXCEPTION(ExceptServerConn, ExceptServer, 10)
-
-/******************数据的派生类异常(第三层)*******************/
-///<  类型转换除错
-TAIJI_NEW_EXCEPTION(ExceptTypeConvert, ExceptData, 1)
-///< 参数错误
-TAIJI_NEW_EXCEPTION(ExceptInvalidArg, ExceptData, 2)
-///< 超过最大值
-TAIJI_NEW_EXCEPTION(ExceptExceedMax, ExceptData, 3)
-///< 各种数据结构的访问越界异常
-TAIJI_NEW_EXCEPTION(ExceptOutOfRange, ExceptData, 4)
-///< 数值溢出
-TAIJI_NEW_EXCEPTION(ExceptOverflow, ExceptData, 5)
-///< 空指针异常
-TAIJI_NEW_EXCEPTION(ExceptNullptr, ExceptData, 6)
-
-
-
-} //namespace Taiji
+}//namespace Taiji
 
 #endif /* CEXCEPTION_H_ */
+
