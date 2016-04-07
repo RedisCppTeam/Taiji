@@ -72,16 +72,16 @@ protected:
 	int _inheritNum = 0;
 
 private:
-	friend class Util;
+        friend class CExceptionCheck;
 	static std::map<int , std::string> _codeMap;
 };
 
 std::map<int , std::string> Exception::_codeMap;
 
-class Util
+class CExceptionCheck
 {
 public:
-	Util( int errCode , const std::string &name )
+        CExceptionCheck( int errCode , const std::string &name )
 	{
 		std::pair<std::map<int , std::string>::const_iterator , bool> it =
 				Exception::_codeMap.insert(
@@ -95,7 +95,7 @@ public:
 	}
 };
 
-#define TAIJI_NEW_EXCEPTION( name,parent,code ) \
+#define TAIJI_NEW_EXCEPTION_INCLUDE( name,parent,code ) \
     class name : public parent \
     { \
         public: 	\
@@ -116,10 +116,10 @@ public:
             { \
                 \
             }\
-	static Util _util;\
+        static CExceptionCheck _check;\
     };
 
-#define TAIJI_UTIL(errCode,exceptionName) Util exceptionName::_util(errCode,#exceptionName);
+#define TAIJI_NEW_EXCEPTION_CPP(errCode,exceptionName) CExceptionCheck exceptionName::_check(errCode,#exceptionName);
 
 
 }//namespace Taiji

@@ -17,11 +17,11 @@
 
 namespace Taiji
 {
-TAIJI_NEW_EXCEPTION(RunTimeException, Exception, 100)
-TAIJI_NEW_EXCEPTION(DataException, Exception, 101)
+TAIJI_NEW_EXCEPTION_INCLUDE(RunTimeException, Exception, 100)
+TAIJI_NEW_EXCEPTION_INCLUDE(DataException, Exception, 101)
 
-TAIJI_UTIL(101, RunTimeException)
-TAIJI_UTIL(101, DataException)
+TAIJI_NEW_EXCEPTION_CPP(102, RunTimeException)
+TAIJI_NEW_EXCEPTION_CPP(101, DataException)
 
 }
 int main( )
