@@ -22,13 +22,14 @@ namespace Taiji
 {
 
 //异常编号，异常信息 组成的map
-typedef std::map<int , std::string> ExceptInfoMap;
+typedef std::map<int, std::string> ExceptInfoMap;
 
 
 class Exception: public std::exception
 {
 public:
-    Exception( const std::string &pErrInfo );
+    Exception() = default;
+    Exception( const std::string &errInfo );
 
     ~Exception( ) noexcept;
 
@@ -46,8 +47,7 @@ protected:
 	int _inheritNum = 0;
 
 private:
-        friend class CExceptionCheck;
-    static ExceptInfoMap _codeMap;
+    //friend class CExceptionCheck;
 };
 
 
@@ -61,7 +61,10 @@ private:
 class CExceptionCheck
 {
 public:
-    CExceptionCheck( int errCode , const std::string &name );
+    CExceptionCheck( const std::string &name,const std::string& parent, int errCode );
+private:
+    //static ExceptInfoMap _codeMap;
+    static ExceptInfoMap &__getExceptMap();
 };
 
 #define TAIJI_NEW_EXCEPTION_INCLUDE( name,parent,code ) \
@@ -74,7 +77,7 @@ public:
                 _inheritNum++;\
                 if(_inheritNum>3){ \
                     if(_errCode>0) {\
-                        _errCode=-1; \
+                        _errCode=-_errCode; \
                     } \
                 }else{ \
                     _errCode=(int)code+parent::_errCode;\
@@ -88,14 +91,15 @@ public:
         static CExceptionCheck _check;\
     };
 
-#define TAIJI_NEW_EXCEPTION_CPP(errCode,exceptionName) CExceptionCheck exceptionName::_check(errCode,#exceptionName);
+#define TAIJI_NEW_EXCEPTION_CPP( exceptionName, parent,errCode) \
+    CExceptionCheck exceptionName::_check( #exceptionName, #parent,errCode );
 
 
 ////////////////////////////////////基本模块异常///////////////////////////////////
 //添加基类异常的时候注意不要重复编号
 //
 /////////////////////////////////////////////////////////////////////////////////
-TAIJI_NEW_EXCEPTION_INCLUDE( ExceptProtocal ,Exception,900)
+//TAIJI_NEW_EXCEPTION_INCLUDE( ExceptProtocal ,Exception,900)
 
 
 

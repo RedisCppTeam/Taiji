@@ -15,13 +15,17 @@ namespace Taiji {
 
 
 //异常编号与异常名字组成的 map
-ExceptInfoMap Exception::_codeMap;
 
 
+ExceptInfoMap& GetExceptionCode( void )
+{
+    static ExceptInfoMap mapCode;
+    return mapCode;
+}
 
 
-Exception::Exception(const std::string &pErrInfo) :
-    _errInfo(pErrInfo)
+Exception::Exception(const std::string &errInfo) :
+    _errInfo(errInfo)
 {
 
 }
@@ -62,19 +66,29 @@ const std::string Exception::getErrInfo()
     return errInfo;
 }
 
-CExceptionCheck::CExceptionCheck(int errCode, const std::string &name)
+CExceptionCheck::CExceptionCheck(const std::string &name,
+                                 const std::string &parent, int errCode)
 {
-    auto it =
-            Exception::_codeMap.insert(ExceptInfoMap::value_type(errCode,name));
+      ExceptInfoMap& codeMap = __getExceptMap();
+      auto it =
+           codeMap.insert(ExceptInfoMap::value_type(errCode,name));
+
     if ( !it.second )
     {
-        std::cout <<"异常码重复，重复的是"<< it.first->second << "和"<<name<<std::endl;
+        std::cout <<"Multiply defined ExceptCode，they are"<< it.first->second << " and "<<name<<std::endl;
         exit(1);
     }
 }
 
 
-TAIJI_NEW_EXCEPTION_CPP( 900,ExceptProtocal )
+ExceptInfoMap& CExceptionCheck::__getExceptMap( void )
+{
+    static ExceptInfoMap mapCode;
+    return mapCode;
+}
+
+
+//TAIJI_NEW_EXCEPTION_CPP( ExceptProtocal, Exception, 900 )
 
 
 }

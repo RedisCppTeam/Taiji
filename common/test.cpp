@@ -17,24 +17,27 @@
 
 namespace Taiji
 {
-TAIJI_NEW_EXCEPTION_INCLUDE(RunTimeException, Exception, 100)
-TAIJI_NEW_EXCEPTION_INCLUDE(DataException, Exception, 101)
+TAIJI_NEW_EXCEPTION_INCLUDE( RunTimeException, Exception, 100 )
+TAIJI_NEW_EXCEPTION_CPP( RunTimeException, Exception, 100 )
 
-TAIJI_NEW_EXCEPTION_CPP(102, RunTimeException)
-TAIJI_NEW_EXCEPTION_CPP(101, DataException)
+
+TAIJI_NEW_EXCEPTION_INCLUDE( DataException, Exception, 100 )
+TAIJI_NEW_EXCEPTION_CPP( DataException,Exception, 100 )
 
 }
+
+
 int main( )
 {
-	try
-	{
-		throw Taiji::RunTimeException("sdf");
-	} catch( Taiji::RunTimeException &e )
-	{
-		std::cout << e.getErrInfo() << std::endl;
-
-	}
-
-	return 0;
+//	try
+//	{
+//		throw Taiji::RunTimeException("sdf");
+//	} catch( Taiji::RunTimeException &e )
+//	{
+//		std::cout << e.getErrInfo() << std::endl;
+//
+//	}
+//
+//	return 0;
 }
 
