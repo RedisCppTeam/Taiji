@@ -21,50 +21,24 @@
 namespace Taiji
 {
 
+//异常编号，异常信息 组成的map
+typedef std::map<int , std::string> ExceptInfoMap;
+
+
 class Exception: public std::exception
 {
 public:
-	Exception( const std::string &pErrInfo ) :
-			_errInfo(pErrInfo)
-	{
+    Exception( const std::string &pErrInfo );
 
-	}
+    ~Exception( ) noexcept;
 
-	~Exception( ) noexcept
-	{
+    virtual const char* what( ) noexcept;
 
-	}
+    const std::string getErrorCodeString( ) noexcept;
 
-	virtual const char* what( ) noexcept
-	{
-		return _errInfo.c_str();
-	}
+    int getErrorCode( );
 
-	const std::string getErrorCodeString( ) noexcept
-	{
-		std::string errCode;
-		std::stringstream ss;
-		ss << _errCode;
-		ss >> errCode;
-
-		return errCode;
-	}
-
-	int getErrorCode( )
-	{
-		return _errCode;
-	}
-
-	const std::string getErrInfo( )
-	{
-		std::string errCode, errInfo;
-		std::stringstream ss;
-		ss << _errCode;
-		ss >> errCode;
-		errInfo = errCode + ":" + _errInfo;
-
-		return errInfo;
-	}
+    const std::string getErrInfo( );
 
 protected:
 	std::string _errInfo;
@@ -73,26 +47,21 @@ protected:
 
 private:
         friend class CExceptionCheck;
-	static std::map<int , std::string> _codeMap;
+    static ExceptInfoMap _codeMap;
 };
 
-std::map<int , std::string> Exception::_codeMap;
 
+
+
+/**
+ * @brief The CExceptionCheck class
+ *
+ * 在程序启动的时候使用构造函数来检测异常编号是否有重复
+ */
 class CExceptionCheck
 {
 public:
-        CExceptionCheck( int errCode , const std::string &name )
-	{
-		std::pair<std::map<int , std::string>::const_iterator , bool> it =
-				Exception::_codeMap.insert(
-						std::map<int , std::string>::value_type(errCode,
-								name));
-		if ( !it.second )
-		{
-			std::cout <<"异常码重复，重复的是"<< it.first->second << "和"<<name<<std::endl;
-			exit(1);
-		}
-	}
+    CExceptionCheck( int errCode , const std::string &name );
 };
 
 #define TAIJI_NEW_EXCEPTION_INCLUDE( name,parent,code ) \
@@ -102,14 +71,14 @@ public:
             name( const std::string& pErrInfo) \
             : parent( pErrInfo) \
             { \
-        	_inheritNum++;\
-        	if(_inheritNum>3){ \
-        		if(_errCode>0) {\
-        			_errCode=-_errCode; \
-			} \
-		}else{ \
-			_errCode=(int)code+parent::_errCode;\
-		} \
+                _inheritNum++;\
+                if(_inheritNum>3){ \
+                    if(_errCode>0) {\
+                        _errCode=-1; \
+                    } \
+                }else{ \
+                    _errCode=(int)code+parent::_errCode;\
+                } \
             }	\
             \
             ~name( ) throw()\
@@ -120,6 +89,17 @@ public:
     };
 
 #define TAIJI_NEW_EXCEPTION_CPP(errCode,exceptionName) CExceptionCheck exceptionName::_check(errCode,#exceptionName);
+
+
+////////////////////////////////////基本模块异常///////////////////////////////////
+//添加基类异常的时候注意不要重复编号
+//
+/////////////////////////////////////////////////////////////////////////////////
+TAIJI_NEW_EXCEPTION_INCLUDE( ExceptProtocal ,Exception,900)
+
+
+
+
 
 
 }//namespace Taiji

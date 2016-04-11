@@ -12,7 +12,7 @@
  * 修订说明:初始版本
  */
 
-#include "Exception.hpp"
+#include "Exception.h"
 #include <iostream>
 
 namespace Taiji
