@@ -14,6 +14,8 @@
 
 #include "Exception.h"
 #include <iostream>
+#include<gtest/gtest.h>
+
 
 namespace Taiji
 {
@@ -25,23 +27,44 @@ TAIJI_NEW_EXCEPTION_CPP( RunTimeException, Exception, 100 )
 //TAIJI_NEW_EXCEPTION_INCLUDE( DataException, Exception, 100 )
 //TAIJI_NEW_EXCEPTION_CPP( DataException,Exception, 100 )
 
-TAIJI_NEW_EXCEPTION_INCLUDE( DataException, Exception, 100 )
-TAIJI_NEW_EXCEPTION_CPP( DataException,Exception, 100 )
+TAIJI_NEW_EXCEPTION_INCLUDE( DataException, Exception, 200 )
+TAIJI_NEW_EXCEPTION_CPP( DataException,Exception, 200 )
 
 }
 
+using namespace Taiji;
 
-int main( )
+class CExceptUnitTest : public testing::Test
 {
-//	try
-//	{
-//		throw Taiji::RunTimeException("sdf");
-//	} catch( Taiji::RunTimeException &e )
-//	{
-//		std::cout << e.getErrInfo() << std::endl;
-//
-//	}
-//
-//	return 0;
+public:
+    CExceptUnitTest() = default;
+    ~CExceptUnitTest() = default;
+
+    static void SetUpTestCase( void )
+    {
+        std::cout << "开始异常测试" << std::endl;
+    }
+
+
+
+    static void TearDownTestCase( void )
+    {
+        std::cout << "结束异常测试" << std::endl;
+    }
+
+};
+
+
+TEST_F( CExceptUnitTest, Except_Ok )
+{
+    ASSERT_THROW( throw ExceptProtocal( "testing protocal exception" ), ExceptProtocal );
 }
+
+
+
+
+
+
+
+
 
