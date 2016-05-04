@@ -1,9 +1,9 @@
 #include <iostream>
-#include "CUtil.h"
-#include "CLog.h"
+#include "Util/CUtil.h"
+#include "Util/CLog.h"
 #include <Poco/Exception.h>
 #include <thread>
-#include "common.h"
+#include "Util/common.h"
 
 using Poco::Data::Keywords::now;
 using Poco::Data::Keywords::into;
@@ -35,6 +35,7 @@ void TestMysql()
         taskdetailTable = taskList[taskCnt].get<2>();
         DEBUGOUT("taskName", taskName);
         DEBUGOUT("tablename", taskdetailTable);
+        std::cout << taskdetailTable << std::endl;
     }
 }
 

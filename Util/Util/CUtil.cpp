@@ -67,7 +67,7 @@ Data::Session CUtil::getMysql( void )
 
 void CUtil::__uninitMysql()
 {
-    if ( _pSessionPool.get() )
+    if ( _pSessionPool == nullptr )
     {
         _pSessionPool->shutdown();
         Poco::Data::MySQL::Connector::unregisterConnector();
