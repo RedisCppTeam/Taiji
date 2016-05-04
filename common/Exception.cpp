@@ -69,6 +69,7 @@ const std::string Exception::getErrInfo()
 CExceptionCheck::CExceptionCheck(const std::string &name,
                                  const std::string &parent, int errCode)
 {
+      parent.size();	//去除编译警告
       ExceptInfoMap& codeMap = __getExceptMap();
       auto it =
            codeMap.insert(ExceptInfoMap::value_type(errCode,name));
