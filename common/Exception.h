@@ -99,7 +99,7 @@ private:
 //添加基类异常的时候注意不要重复编号
 //
 /////////////////////////////////////////////////////////////////////////////////
-//TAIJI_NEW_EXCEPTION_INCLUDE( ExceptProtocal ,Exception,900)
+TAIJI_NEW_EXCEPTION_INCLUDE( ExceptProtocal ,Exception,900)
 
 
 

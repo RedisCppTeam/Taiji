@@ -89,7 +89,7 @@ ExceptInfoMap& CExceptionCheck::__getExceptMap( void )
 }
 
 
-//TAIJI_NEW_EXCEPTION_CPP( ExceptProtocal, Exception, 900 )
+TAIJI_NEW_EXCEPTION_CPP( ExceptProtocal, Exception, 900 )
 
 
 }
