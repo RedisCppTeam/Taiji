@@ -12,9 +12,9 @@
  * 修订说明:初始版本
  */
 
-#include "Exception.h"
+#include "Exception/Exception.h"
 #include <iostream>
-#include<gtest/gtest.h>
+#include <gtest/gtest.h>
 
 
 namespace Taiji

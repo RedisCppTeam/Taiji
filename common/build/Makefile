@@ -49,7 +49,7 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../gtest/UnitTest.cpp \
-		../Exception.cpp 
+		../common/Exception.cpp 
 OBJECTS       = UnitTest.o \
 		Exception.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -103,8 +103,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		../../common.pro Exception.h ../gtest/UnitTest.cpp \
-		../Exception.cpp
+		../../common.pro common/Exception.h ../gtest/UnitTest.cpp \
+		../common/Exception.cpp
 QMAKE_TARGET  = common
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = common
@@ -280,11 +280,11 @@ compiler_clean:
 
 ####### Compile
 
-UnitTest.o: ../gtest/UnitTest.cpp ../Exception.h
+UnitTest.o: ../gtest/UnitTest.cpp ../common/Exception.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o UnitTest.o ../gtest/UnitTest.cpp
 
-Exception.o: ../Exception.cpp ../Exception.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Exception.o ../Exception.cpp
+Exception.o: ../common/Exception.cpp ../common/Exception.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Exception.o ../common/Exception.cpp
 
 ####### Install
 
