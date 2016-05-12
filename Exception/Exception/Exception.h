@@ -21,85 +21,45 @@
 namespace Taiji
 {
 
-//异常编号，异常信息 组成的map
-typedef std::map<int, std::string> ExceptInfoMap;
 
 
 class Exception: public std::exception
 {
 public:
-    Exception() = default;
     Exception( const std::string &errInfo );
 
     ~Exception( ) noexcept;
 
-    virtual const char* what( ) noexcept;
+    virtual const char* what( ) const noexcept;
 
-    const std::string getErrorCodeString( ) noexcept;
-
-    int getErrorCode( );
-
-    const std::string getErrInfo( );
-
-protected:
+private:
 	std::string _errInfo;
-	int _errCode = 0;
-	int _inheritNum = 0;
-
-private:
-    //friend class CExceptionCheck;
 };
 
 
 
 
-/**
- * @brief The CExceptionCheck class
- *
- * 在程序启动的时候使用构造函数来检测异常编号是否有重复
- */
-class CExceptionCheck
-{
-public:
-    CExceptionCheck( const std::string &name,const std::string& parent, int errCode );
-private:
-    //static ExceptInfoMap _codeMap;
-    static ExceptInfoMap &__getExceptMap();
-};
-
-#define TAIJI_NEW_EXCEPTION_INCLUDE( name,parent,code ) \
+#define TAIJI_NEW_EXCEPTION( name,parent ) \
     class name : public parent \
     { \
         public: 	\
             name( const std::string& pErrInfo) \
             : parent( pErrInfo) \
             { \
-                _inheritNum++;\
-                if(_inheritNum>3){ \
-                    if(_errCode>0) {\
-                        _errCode=-_errCode; \
-                    } \
-                }else{ \
-                    _errCode=(int)code+parent::_errCode;\
-                } \
-            }	\
+            } \
             \
-            ~name( ) throw()\
+            ~name( ) noexcept\
             { \
                 \
             }\
-        static CExceptionCheck _check;\
-    };
-
-#define TAIJI_NEW_EXCEPTION_CPP( exceptionName, parent,errCode) \
-    CExceptionCheck exceptionName::_check( #exceptionName, #parent,errCode );
+    }
 
 
 ////////////////////////////////////基本模块异常///////////////////////////////////
 //添加基类异常的时候注意不要重复编号
 //
 /////////////////////////////////////////////////////////////////////////////////
-TAIJI_NEW_EXCEPTION_INCLUDE( ExceptProtocal ,Exception,900)
+TAIJI_NEW_EXCEPTION( ExceptProtocal ,Exception );
 
 
 

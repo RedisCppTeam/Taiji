@@ -17,21 +17,6 @@
 #include <gtest/gtest.h>
 
 
-namespace Taiji
-{
-TAIJI_NEW_EXCEPTION_INCLUDE( RunTimeException, Exception, 100 )
-TAIJI_NEW_EXCEPTION_CPP( RunTimeException, Exception, 100 )
-
-
-//测试编号重复问题,程序会直接退出
-//TAIJI_NEW_EXCEPTION_INCLUDE( DataException, Exception, 100 )
-//TAIJI_NEW_EXCEPTION_CPP( DataException,Exception, 100 )
-
-TAIJI_NEW_EXCEPTION_INCLUDE( DataException, Exception, 200 )
-TAIJI_NEW_EXCEPTION_CPP( DataException,Exception, 200 )
-
-}
-
 using namespace Taiji;
 
 class CExceptUnitTest : public testing::Test
