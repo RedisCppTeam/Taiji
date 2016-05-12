@@ -7,12 +7,15 @@ SOURCES += \
     gtest/UnitTest.cpp \
     Util/CLog.cpp \
     Util/CUtil.cpp \
-    Util/Exception/Exception.cpp
+    Util/Exception/Except.cpp \
+    Util/CLogs.cpp
+
 
 HEADERS += \
     Util/CLog.h \
     Util/CUtil.h \
-    Util/Exception/Exception.h
+    Util/Exception/Except.h \
+    Util/CLogs.h
 
 
 LIBS += \

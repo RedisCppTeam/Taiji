@@ -11,8 +11,8 @@
  *
  * 修订说明:初始版本
  */
-#ifndef EXCEPTION_H_
-#define EXCEPTION_H_
+#ifndef TAIJI_EXCEPT_H_
+#define TAIJI_EXCEPT_H_
 
 #include <exception>
 #include <string>
@@ -27,7 +27,7 @@ class Except: public std::exception
 public:
     Except( const std::string &errInfo );
 
-    ~Except( ) noexcept;
+    virtual ~Except( ) noexcept;
 
     virtual const char* what( ) const noexcept;
 
@@ -51,17 +51,18 @@ private:
             { \
                 \
             }\
-    }
+    };
 
 
 ////////////////////////////////////基本模块异常///////////////////////////////////
-//添加基类异常的时候注意不要重复编号
+//添加基类异常
 //
+//协议类的基本类
+TAIJI_NEW_EXCEPTION( ExceptProtocal ,Except )
+
+//Util 工具类的基本类
+TAIJI_NEW_EXCEPTION( ExceptUtil, Except )
 /////////////////////////////////////////////////////////////////////////////////
-TAIJI_NEW_EXCEPTION( ExceptProtocal ,Except );
-
-
-
 
 
 

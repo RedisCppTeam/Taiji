@@ -15,6 +15,9 @@
 
 namespace  Taiji {
 
+namespace Util {
+
+
 
 CUtil::~CUtil()
 {
@@ -28,22 +31,7 @@ CUtil &CUtil::instance()
     return singleton;
 }
 
-void CUtil::createLog(const std::string &dir, const std::string &file, const std::string &name,
-                      const std::string &level, const std::string &rotation, const std::string &purgeAge)
-{
-    std::shared_ptr<CLog> pLog( new CLog( dir, file, name, level, rotation, purgeAge) );
-    _logMap.insert( std::pair<std::string,std::shared_ptr<CLog>>( name, pLog ) );
-}
 
-CLog &CUtil::getLog(const std::string &logName )
-{
-    auto itLog = _logMap.find( logName );
-    if ( itLog == _logMap.end() )
-    {
-        throw ExceptionNotFindLog("not find Clog object" );
-    }
-    return *(itLog->second);
-}
 
 void CUtil::initMysql( const string& host, uint16_t port, const string& user, const string&pass,
                        const string& db, uint16_t minSession,uint16_t maxSession )
@@ -99,5 +87,8 @@ CRedisPool::Handle CUtil::getRedis( long millisecond )
      return CRedisPool::Handle( predis,deleter );
 }
 
+
+
+}
 
 } //namespace Taiji

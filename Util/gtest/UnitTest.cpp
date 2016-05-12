@@ -9,7 +9,7 @@ using Poco::Data::Keywords::into;
 
 
 using namespace std;
-using namespace Taiji;
+using namespace Taiji::Util;
 
 void TestMysql()
 {
@@ -40,11 +40,11 @@ void TestMysql()
 
 void TestLog( void )
 {
-   CUtil::instance().createLog("./log/","test.log","Test2","debug" );
-   CUtil::instance().createLog("./log/","test.log","Test","debug" );
-    CLog& log = CUtil::instance().getLog( "Test2" );
-    log.debug( ELogType::SEND,"main","main_f","%s  %s", string( "test1") ,string( "test2") );
-    log.debug( ELogType::SEND,"main","main_f","test............." );
+   //CUtil::instance().createLog("./log/","test.log","Test2","debug" );
+   //CUtil::instance().createLog("./log/","test.log","Test","debug" );
+   // CLog& log = CUtil::instance().getLog( "Test2" );
+   // log.debug( ELogType::SEND,"main","main_f","%s  %s", string( "test1") ,string( "test2") );
+   // log.debug( ELogType::SEND,"main","main_f","test............." );
  }
 
 void TestRedis( void )

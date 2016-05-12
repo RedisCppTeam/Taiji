@@ -51,11 +51,13 @@ OBJECTS_DIR   = ./
 SOURCES       = ../gtest/UnitTest.cpp \
 		../Util/CLog.cpp \
 		../Util/CUtil.cpp \
-		../Util/Exception/Exception.cpp 
+		../Util/Exception/Except.cpp \
+		../Util/CLogs.cpp 
 OBJECTS       = UnitTest.o \
 		CLog.o \
 		CUtil.o \
-		Exception.o
+		Except.o \
+		CLogs.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -109,10 +111,12 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		../../Util.pro Util/CLog.h \
 		Util/CUtil.h \
-		Util/Exception/Exception.h ../gtest/UnitTest.cpp \
+		Util/Exception/Except.h \
+		Util/CLogs.h ../gtest/UnitTest.cpp \
 		../Util/CLog.cpp \
 		../Util/CUtil.cpp \
-		../Util/Exception/Exception.cpp
+		../Util/Exception/Except.cpp \
+		../Util/CLogs.cpp
 QMAKE_TARGET  = Util
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = Util
@@ -292,15 +296,19 @@ UnitTest.o: ../gtest/UnitTest.cpp ../Util/CUtil.h \
 		../Util/CLog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o UnitTest.o ../gtest/UnitTest.cpp
 
-CLog.o: ../Util/CLog.cpp ../Util/CLog.h
+CLog.o: ../Util/CLog.cpp ../Util/CLog.h \
+		../Util/Exception/Except.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CLog.o ../Util/CLog.cpp
 
 CUtil.o: ../Util/CUtil.cpp ../Util/CUtil.h \
 		../Util/CLog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CUtil.o ../Util/CUtil.cpp
 
-Exception.o: ../Util/Exception/Exception.cpp ../Util/Exception/Exception.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Exception.o ../Util/Exception/Exception.cpp
+Except.o: ../Util/Exception/Except.cpp ../Util/Exception/Except.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Except.o ../Util/Exception/Except.cpp
+
+CLogs.o: ../Util/CLogs.cpp ../Util/CLogs.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CLogs.o ../Util/CLogs.cpp
 
 ####### Install
 

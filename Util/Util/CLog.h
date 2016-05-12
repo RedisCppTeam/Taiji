@@ -16,9 +16,18 @@
 #include <iostream>
 #include <string>
 #include <Poco/Logger.h>
+#include "Exception/Except.h"
+
 
 namespace Taiji
 {
+
+namespace Util {
+
+
+TAIJI_NEW_EXCEPTION( ExceptLog, ExceptUtil )
+TAIJI_NEW_EXCEPTION( ExceptNullptr, ExceptLog )
+
 
 /**
  * @brief The ELogType enum
@@ -210,7 +219,7 @@ private:
 };
 
 
-
+}	//namespace Util
 
 } //namespace Taiji
 #endif // CLOG_H

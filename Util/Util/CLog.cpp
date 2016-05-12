@@ -25,14 +25,20 @@
 #include <Poco/AutoPtr.h>
 #include <Poco/Thread.h>
 
-#include "Exception/Exception.h"
+
 
 namespace Taiji
 {
 
+namespace Util {
+
+
+//
+
+
 
  //一些默认值常量
-const std::string CLog::HEAD_FMT							=		"[**%s**] [tid:%lu] [class:%s] [func:%s] MSG:";
+const std::string CLog::HEAD_FMT			=		"[**%s**] [tid:%lu] [class:%s] [func:%s] MSG:";
 const std::string CLog::DEFAULT_LOG_ROTATION  =		"1 days";
 const std::string CLog::DEFAULT_LOG_PURGEAGE =		"1 months";
 const std::string CLog::DEFAULT_LOG_LEVEL			=		"information";
@@ -539,6 +545,6 @@ void CLog::fatal(ELogType type, const std::string &className, const std::string 
 }
 
 
-
+} //namespace Util
 
 } //namespace Taiji
