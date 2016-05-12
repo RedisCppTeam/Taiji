@@ -11,8 +11,8 @@ LIBS += \
 
 SOURCES += \
     gtest/UnitTest.cpp \
-    Exception/Exception.cpp
+    Exception/Except.cpp
 
 HEADERS += \
-    Exception/Exception.h
+    Exception/Except.h
 
