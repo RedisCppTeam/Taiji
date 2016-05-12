@@ -12,7 +12,7 @@
  * 修订说明:初始版本
  */
 
-#include "Exception/Exception.h"
+#include "Exception/Except.h"
 #include <iostream>
 #include <gtest/gtest.h>
 
