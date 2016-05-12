@@ -19,12 +19,8 @@
 #include <memory>
 #include <string>
 #include <map>
-#include "Exception.hpp"
 
 namespace Taiji {
-
-///< 找不到想要的日志对象异常
-TAIJI_NEW_EXCEPTION( ExceptionNotFindLog, Exception,ExceptCode::NO_EXCEPT_CODE )
 
 
 

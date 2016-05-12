@@ -6,13 +6,13 @@ CONFIG -= qt
 SOURCES += \
     gtest/UnitTest.cpp \
     Util/CLog.cpp \
-    Util/CUtil.cpp
+    Util/CUtil.cpp \
+    Util/Exception/Exception.cpp
 
 HEADERS += \
     Util/CLog.h \
-    Util/common.h \
     Util/CUtil.h \
-    Util/Exception.hpp
+    Util/Exception/Exception.h
 
 
 LIBS += \

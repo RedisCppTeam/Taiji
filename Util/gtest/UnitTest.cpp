@@ -3,7 +3,6 @@
 #include "Util/CLog.h"
 #include <Poco/Exception.h>
 #include <thread>
-#include "Util/common.h"
 
 using Poco::Data::Keywords::now;
 using Poco::Data::Keywords::into;

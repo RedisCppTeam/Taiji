@@ -50,10 +50,12 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../gtest/UnitTest.cpp \
 		../Util/CLog.cpp \
-		../Util/CUtil.cpp 
+		../Util/CUtil.cpp \
+		../Util/Exception/Exception.cpp 
 OBJECTS       = UnitTest.o \
 		CLog.o \
-		CUtil.o
+		CUtil.o \
+		Exception.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -106,11 +108,11 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		../../Util.pro Util/CLog.h \
-		Util/common.h \
 		Util/CUtil.h \
-		Util/Exception.hpp ../gtest/UnitTest.cpp \
+		Util/Exception/Exception.h ../gtest/UnitTest.cpp \
 		../Util/CLog.cpp \
-		../Util/CUtil.cpp
+		../Util/CUtil.cpp \
+		../Util/Exception/Exception.cpp
 QMAKE_TARGET  = Util
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = Util
@@ -287,18 +289,18 @@ compiler_clean:
 ####### Compile
 
 UnitTest.o: ../gtest/UnitTest.cpp ../Util/CUtil.h \
-		../Util/CLog.h \
-		../Util/Exception.hpp
+		../Util/CLog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o UnitTest.o ../gtest/UnitTest.cpp
 
-CLog.o: ../Util/CLog.cpp ../Util/CLog.h \
-		../Util/Exception.hpp
+CLog.o: ../Util/CLog.cpp ../Util/CLog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CLog.o ../Util/CLog.cpp
 
 CUtil.o: ../Util/CUtil.cpp ../Util/CUtil.h \
-		../Util/CLog.h \
-		../Util/Exception.hpp
+		../Util/CLog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CUtil.o ../Util/CUtil.cpp
+
+Exception.o: ../Util/Exception/Exception.cpp ../Util/Exception/Exception.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Exception.o ../Util/Exception/Exception.cpp
 
 ####### Install
 

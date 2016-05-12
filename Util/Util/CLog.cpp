@@ -25,7 +25,7 @@
 #include <Poco/AutoPtr.h>
 #include <Poco/Thread.h>
 
-#include "Exception.hpp"
+#include "Exception/Exception.h"
 
 namespace Taiji
 {
