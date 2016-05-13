@@ -12,8 +12,39 @@
 
 #include "CLogs.h"
 
-CLogs::CLogs()
-{
+namespace Taiji {
 
+namespace Util {
+
+
+CLogs& CLogs::instance()
+{
+    static CLogs singleton;
+    return singleton;
 }
 
+
+
+
+void CLogs::createLog(const std::string &dir, const std::string &file, const std::string &name,
+                      const std::string &level, const std::string &rotation, const std::string &purgeAge)
+{
+    std::shared_ptr<CLog> pLog( new CLog( dir, file, name, level, rotation, purgeAge) );
+    _logMap.insert( std::pair<std::string,std::shared_ptr<CLog>>( name, pLog ) );
+}
+
+CLog &CLogs::getLog(const std::string &logName )
+{
+    auto itLog = _logMap.find( logName );
+    if ( itLog == _logMap.end() )
+    {
+        throw ExceptNotFindLog("not find Clog object" );
+    }
+    return *(itLog->second);
+}
+
+
+}// namespace Util
+
+
+}//namespace Taiji

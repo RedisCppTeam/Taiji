@@ -8,14 +8,16 @@ SOURCES += \
     Util/CLog.cpp \
     Util/CUtil.cpp \
     Util/Exception/Except.cpp \
-    Util/CLogs.cpp
+    Util/CLogs.cpp \
+    gtest/CUtilUnitTest.cpp
 
 
 HEADERS += \
     Util/CLog.h \
     Util/CUtil.h \
     Util/Exception/Except.h \
-    Util/CLogs.h
+    Util/CLogs.h \
+    gtest/CUtilUnitTest.h
 
 
 LIBS += \
@@ -23,4 +25,7 @@ LIBS += \
         -lPocoData		\
         -lRedisclient		\
         -lPocoNet		\
-        -lPocoDataMySQL
+        -lPocoDataMySQL		\
+        -lgtest    		\
+        -lgtest_main   		\
+        -lpthread

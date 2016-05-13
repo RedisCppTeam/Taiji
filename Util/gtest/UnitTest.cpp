@@ -61,11 +61,7 @@ void TestRedis( void )
 }
 
 
-int main()
-{
-    TestLog();
-    TestMysql();
-    TestRedis();
-    return 0;
-}
+
+
+
 

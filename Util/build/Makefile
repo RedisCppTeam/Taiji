@@ -36,7 +36,7 @@ DISTNAME      = Util1.0.0
 DISTDIR = /home/yuhaiyang/codespace/Taiji/Util/build/.tmp/Util1.0.0
 LINK          = g++
 LFLAGS        = -m64
-LIBS          = $(SUBLIBS) -lPocoFoundation -lPocoData -lRedisclient -lPocoNet -lPocoDataMySQL 
+LIBS          = $(SUBLIBS) -lPocoFoundation -lPocoData -lRedisclient -lPocoNet -lPocoDataMySQL -lgtest -lgtest_main -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -52,12 +52,14 @@ SOURCES       = ../gtest/UnitTest.cpp \
 		../Util/CLog.cpp \
 		../Util/CUtil.cpp \
 		../Util/Exception/Except.cpp \
-		../Util/CLogs.cpp 
+		../Util/CLogs.cpp \
+		../gtest/CUtilUnitTest.cpp 
 OBJECTS       = UnitTest.o \
 		CLog.o \
 		CUtil.o \
 		Except.o \
-		CLogs.o
+		CLogs.o \
+		CUtilUnitTest.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -112,11 +114,13 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../../Util.pro Util/CLog.h \
 		Util/CUtil.h \
 		Util/Exception/Except.h \
-		Util/CLogs.h ../gtest/UnitTest.cpp \
+		Util/CLogs.h \
+		gtest/CUtilUnitTest.h ../gtest/UnitTest.cpp \
 		../Util/CLog.cpp \
 		../Util/CUtil.cpp \
 		../Util/Exception/Except.cpp \
-		../Util/CLogs.cpp
+		../Util/CLogs.cpp \
+		../gtest/CUtilUnitTest.cpp
 QMAKE_TARGET  = Util
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = Util
@@ -293,7 +297,8 @@ compiler_clean:
 ####### Compile
 
 UnitTest.o: ../gtest/UnitTest.cpp ../Util/CUtil.h \
-		../Util/CLog.h
+		../Util/CLog.h \
+		../Util/Exception/Except.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o UnitTest.o ../gtest/UnitTest.cpp
 
 CLog.o: ../Util/CLog.cpp ../Util/CLog.h \
@@ -301,14 +306,23 @@ CLog.o: ../Util/CLog.cpp ../Util/CLog.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CLog.o ../Util/CLog.cpp
 
 CUtil.o: ../Util/CUtil.cpp ../Util/CUtil.h \
-		../Util/CLog.h
+		../Util/CLog.h \
+		../Util/Exception/Except.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CUtil.o ../Util/CUtil.cpp
 
 Except.o: ../Util/Exception/Except.cpp ../Util/Exception/Except.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Except.o ../Util/Exception/Except.cpp
 
-CLogs.o: ../Util/CLogs.cpp ../Util/CLogs.h
+CLogs.o: ../Util/CLogs.cpp ../Util/CLogs.h \
+		../Util/CLog.h \
+		../Util/Exception/Except.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CLogs.o ../Util/CLogs.cpp
+
+CUtilUnitTest.o: ../gtest/CUtilUnitTest.cpp ../gtest/CUtilUnitTest.h \
+		../Util/CLogs.h \
+		../Util/CLog.h \
+		../Util/Exception/Except.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CUtilUnitTest.o ../gtest/CUtilUnitTest.cpp
 
 ####### Install
 

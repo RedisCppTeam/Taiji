@@ -31,6 +31,17 @@ CUtil &CUtil::instance()
     return singleton;
 }
 
+void CUtil::createLog(const std::string &dir, const std::string &file, const std::string &name,
+                      const std::string &level, const std::string &rotation, const std::string &purgeAge)
+{
+    CLogs::instance().createLog( dir, file, name, level, rotation, purgeAge );
+}
+
+CLog &CUtil::getLog(const std::string &logName)
+{
+   return( CLogs::instance().getLog( logName ));
+}
+
 
 
 void CUtil::initMysql( const string& host, uint16_t port, const string& user, const string&pass,
