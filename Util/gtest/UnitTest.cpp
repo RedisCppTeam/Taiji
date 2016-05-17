@@ -22,18 +22,16 @@ void TestMysql()
 
     Poco::Data::Statement select( session );
     string sql = "select taskID,taskName,detailTable from awifi_nas_taskList where enable =1";
-    DEBUGOUT(sql, "sql")
     select << sql, into(taskList), now;
     string taskName;
     string taskdetailTable;
     const int count = taskList.size();
-    DEBUGOUT("数据库读取，可支持的任务个数为", count)
                     for (int  taskCnt = 0; taskCnt < count ; taskCnt++ )
     {
         taskName = taskList[taskCnt].get<1>();
         taskdetailTable = taskList[taskCnt].get<2>();
-        DEBUGOUT("taskName", taskName);
-        DEBUGOUT("tablename", taskdetailTable);
+       // DEBUGOUT("taskName", taskName);
+       // DEBUGOUT("tablename", taskdetailTable);
         std::cout << taskdetailTable << std::endl;
     }
 }
@@ -49,15 +47,15 @@ void TestLog( void )
 
 void TestRedis( void )
 {
-    CUtil::instance().initRedis( "127.0.0.1",6379, 100 );
-    std::shared_ptr<CRedisClient> predis  = CUtil::instance().getRedis( 1000 );
-    CRedisClient::VecString vals;
-    predis->keys( "*", vals );
+  //  CUtil::instance().initRedis( "127.0.0.1",6379, 100 );
+  //  std::shared_ptr<CRedisClient> predis  = CUtil::instance().getRedis( 1000 );
+  //  CRedisClient::VecString vals;
+  //  predis->keys( "*", vals );
 
-    for ( auto &it : vals )
-    {
-        std::cout << it << std::endl;
-    }
+  //  for ( auto &it : vals )
+  //  {
+  //      std::cout << it << std::endl;
+  //  }
 }
 
 

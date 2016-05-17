@@ -13,7 +13,7 @@
 
 #include "CLog.h"
 #include <Poco/Data/SessionPool.h>
-#include <CRedisPool.h>
+#include <redis/CRedisPool.h>
 #include <memory>
 #include <iostream>
 #include <memory>
@@ -107,7 +107,7 @@ public:
      * @param maxSession 最大链接数
      * @return true 成功。false 失败
      */
-    bool initRedis(const std::string &host, uint16_t port, uint16_t maxSession);
+    void initRedis(const std::string &host, uint16_t port, uint16_t maxSession);
 
     /**
      * @brief getRedis 从 CRedisPool 里获取一个链接。
@@ -115,11 +115,11 @@ public:
      * @param millisecond　如果所有链接都忙的话那么允许等待的最大的秒数。
      * @return 	返回一个可用的链接对象地址。
      */
-     CRedisPool::Handle getRedis(long millisecond );
+     Redis::CRedisPool::Handle getRedis(long millisecond );
 
 private:
     CUtil() = default;
-    CRedisPool _redisPool;
+    std::shared_ptr<Redis::CRedisPool> _redisPool = nullptr;
     std::shared_ptr<Poco::Data::SessionPool> _pSessionPool = nullptr;
     std::shared_ptr<CLogs> _logs = nullptr;
 

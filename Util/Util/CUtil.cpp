@@ -17,7 +17,7 @@ namespace  Taiji {
 
 namespace Util {
 
-
+using namespace Poco;
 
 CUtil::~CUtil()
 {
@@ -53,7 +53,7 @@ void CUtil::initMysql( const string& host, uint16_t port, const string& user, co
     std::string connectInfo = "host=" + host + " ; " + "port=" +sPort + " ; "
                     + "user=" + user + " ; " + "password=" +pass + " ; " + "db="
                     + db + " ; " + "auto-reconnect=" + "true";
-    DEBUGOUT( "connectInfo", connectInfo );
+    //DEBUGOUT( "connectInfo", connectInfo );
     //------------------------初始化数据库连接池-------------------------
     Poco::Data::MySQL::Connector::registerConnector();
     _pSessionPool =std::unique_ptr<Poco::Data::SessionPool>( new Poco::Data::SessionPool("MySQL", connectInfo, minSession, maxSession) );
@@ -73,29 +73,20 @@ void CUtil::__uninitMysql()
     }
 }
 
-bool CUtil::initRedis( const std::string& host, uint16_t port, uint16_t maxSession )
+void CUtil::initRedis( const std::string& host, uint16_t port, uint16_t maxSession )
 {
-    return (_redisPool.init( host, port,"",0,maxSession,5 ));
+    _redisPool = std::shared_ptr<Redis::CRedisPool>( new Redis::CRedisPool );
+    _redisPool->init( host, port,0,maxSession,5 );
 }
 
 void CUtil::__uninitRedis()
 {
-    _redisPool.closeConnPool();
+    _redisPool->closeConnPool();
 }
 
-CRedisPool::Handle CUtil::getRedis( long millisecond )
+Redis::CRedisPool::Handle CUtil::getRedis( long millisecond )
 {
-    int32_t place = -1;
-     CRedisClient* predis = _redisPool.getConn( place,millisecond );
-     //智能指针的析构器。把 redis 对象 putBack() 回去。
-     auto deleter = [ place,this ]( CRedisClient * pConn )
-     {
-         if( place >= 0 && nullptr != pConn  )
-         {
-             this->_redisPool.pushBackConn( place );
-         }
-     };
-     return CRedisPool::Handle( predis,deleter );
+    return( _redisPool->getRedis( millisecond ) );
 }
 
 

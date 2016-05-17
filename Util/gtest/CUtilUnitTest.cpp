@@ -15,6 +15,9 @@
 #include "Util/CUtil.h"
 
 using namespace Taiji::Util;
+using namespace Taiji::Redis;
+
+
 using Poco::Data::Keywords::now;
 using Poco::Data::Keywords::into;
 
@@ -65,7 +68,7 @@ TEST_F( CUtilUnitTest, Mysql_test )
 TEST_F( CUtilUnitTest, Redis_test )
 {
     CUtil::instance().initRedis( "127.0.0.1",6379, 100 );
-    std::shared_ptr<CRedisClient> predis  = CUtil::instance().getRedis( 1000 );
+    CRedisPool::Handle predis  = CUtil::instance().getRedis( 1000 );
     predis->set( "unitTest","unitTest" );
 
     std::string val;

@@ -23,9 +23,14 @@ HEADERS += \
 LIBS += \
         -lPocoFoundation	\
         -lPocoData		\
-        -lRedisclient		\
         -lPocoNet		\
         -lPocoDataMySQL		\
         -lgtest    		\
         -lgtest_main   		\
-        -lpthread
+        -lpthread			\
+        -lredisclient
+
+unix:!macx: LIBS += -L/usr/local/lib/redis/ -lredisclient
+
+INCLUDEPATH += /usr/local/lib/redis
+DEPENDPATH += /usr/local/lib/redis
