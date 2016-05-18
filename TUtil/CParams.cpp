@@ -9,7 +9,7 @@
 #include "CParams.h"
 #include <chrono>
 namespace Taiji {
-namespace Util {
+namespace TUtil {
 
 void CParams::checkCapMac(const std::string &mac)
 {

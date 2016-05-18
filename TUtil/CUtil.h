@@ -23,7 +23,7 @@
 
 namespace Taiji {
 
-namespace Util {
+namespace TUtil {
 
 TAIJI_NEW_EXCEPTION( ExceptTUtil, Except )
 

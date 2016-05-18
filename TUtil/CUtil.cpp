@@ -15,7 +15,7 @@
 
 namespace  Taiji {
 
-namespace Util {
+namespace TUtil {
 
 using namespace Poco;
 

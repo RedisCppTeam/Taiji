@@ -14,7 +14,7 @@
 
 namespace Taiji {
 
-namespace Util {
+namespace TUtil {
 
 
 CLogs& CLogs::instance()

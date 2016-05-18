@@ -30,7 +30,7 @@
 namespace Taiji
 {
 
-namespace Util {
+namespace TUtil {
 
 
 //

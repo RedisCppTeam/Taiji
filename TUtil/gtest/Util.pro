@@ -29,7 +29,6 @@ HEADERS += \
 
 SOURCES += \
     CUtilUnitTest.cpp \
-    UnitTest.cpp \
     ../CLog.cpp \
     ../CLogs.cpp \
     ../CParams.cpp \
