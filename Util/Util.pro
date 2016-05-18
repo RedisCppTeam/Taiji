@@ -9,7 +9,8 @@ SOURCES += \
     Util/CUtil.cpp \
     Util/Exception/Except.cpp \
     Util/CLogs.cpp \
-    gtest/CUtilUnitTest.cpp
+    gtest/CUtilUnitTest.cpp \
+    Util/CParams.cpp
 
 
 HEADERS += \
@@ -17,7 +18,8 @@ HEADERS += \
     Util/CUtil.h \
     Util/Exception/Except.h \
     Util/CLogs.h \
-    gtest/CUtilUnitTest.h
+    gtest/CUtilUnitTest.h \
+    Util/CParams.h
 
 
 LIBS += \
