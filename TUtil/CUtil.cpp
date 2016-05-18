@@ -66,7 +66,7 @@ Data::Session CUtil::getMysql( void )
 
 void CUtil::__uninitMysql()
 {
-    if ( _pSessionPool == nullptr )
+    if ( _pSessionPool!= nullptr )
     {
         _pSessionPool->shutdown();
         Poco::Data::MySQL::Connector::unregisterConnector();
@@ -75,18 +75,21 @@ void CUtil::__uninitMysql()
 
 void CUtil::initRedis( const std::string& host, uint16_t port, uint16_t maxSession )
 {
-    _redisPool = std::shared_ptr<Redis::CRedisPool>( new Redis::CRedisPool );
-    _redisPool->init( host, port,0,maxSession,5 );
+    _pRedisPool = std::shared_ptr<Redis::CRedisPool>( new Redis::CRedisPool );
+    _pRedisPool->init( host, port,0,maxSession,5 );
 }
 
 void CUtil::__uninitRedis()
 {
-    _redisPool->closeConnPool();
+    if ( _pRedisPool != nullptr )
+    {
+        _pRedisPool->closeConnPool();
+    }
 }
 
 Redis::CRedisPool::Handle CUtil::getRedis( long millisecond )
 {
-    return( _redisPool->getRedis( millisecond ) );
+    return( _pRedisPool->getRedis( millisecond ) );
 }
 
 

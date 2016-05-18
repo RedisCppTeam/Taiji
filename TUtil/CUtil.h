@@ -119,7 +119,7 @@ public:
 
 private:
     CUtil() = default;
-    std::shared_ptr<Redis::CRedisPool> _redisPool = nullptr;
+    std::shared_ptr<Redis::CRedisPool> _pRedisPool = nullptr;
     std::shared_ptr<Poco::Data::SessionPool> _pSessionPool = nullptr;
     std::shared_ptr<CLogs> _logs = nullptr;
 
