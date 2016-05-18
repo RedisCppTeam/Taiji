@@ -3,16 +3,18 @@ CONFIG += console c++11
 CONFIG -= app_bundle
 CONFIG -= qt
 
+INCLUDEPATH +=	\
+        ../../../
+
 LIBS += \
         -lgtest    \
         -lgtest_main   \
         -lpthread
 
+HEADERS += \
+    ../Except.h
 
 SOURCES += \
-    gtest/UnitTest.cpp \
-    Exception/Except.cpp
-
-HEADERS += \
-    Exception/Except.h
+    UnitTest.cpp \
+    ../Except.cpp
 

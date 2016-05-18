@@ -11,8 +11,8 @@
 */
 
 #include "CUtilUnitTest.h"
-#include "../Util/CLogs.h"
-#include "Util/CUtil.h"
+#include "Taiji/TUtil/CLogs.h"
+#include "Taiji/TUtil/CUtil.h"
 
 using namespace Taiji::Util;
 using namespace Taiji::Redis;

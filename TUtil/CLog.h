@@ -16,7 +16,7 @@
 #include <iostream>
 #include <string>
 #include <Poco/Logger.h>
-#include "Exception/Except.h"
+#include "Taiji/Except/Except.h"
 
 
 namespace Taiji
@@ -25,7 +25,7 @@ namespace Taiji
 namespace Util {
 
 
-TAIJI_NEW_EXCEPTION( ExceptLog, ExceptUtil )
+TAIJI_NEW_EXCEPTION( ExceptLog, ExceptTUtil )
 TAIJI_NEW_EXCEPTION( ExceptNullptr, ExceptLog )
 
 

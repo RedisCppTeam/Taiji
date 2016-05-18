@@ -18,14 +18,14 @@
 #include <iostream>
 #include <memory>
 #include "CLogs.h"
-#include "Exception/Except.h"
+#include "Taiji/Except/Except.h"
 
 
 namespace Taiji {
 
 namespace Util {
 
-
+TAIJI_NEW_EXCEPTION( ExceptTUtil, Except )
 
 /**
  * @brief The CUtil class
