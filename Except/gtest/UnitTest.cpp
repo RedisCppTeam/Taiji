@@ -12,7 +12,7 @@
  * 修订说明:初始版本
  */
 
-#include "Exception/Except.h"
+#include "Taiji/Except/Except.h"
 #include <iostream>
 #include <gtest/gtest.h>
 
