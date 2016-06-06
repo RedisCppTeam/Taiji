@@ -8,7 +8,7 @@
  */
 #ifndef CPARAMS_H
 #define CPARAMS_H
-#include "Taiji/Except/Except.h"
+#include "Taiji/TExcept/Except.h"
 #include <iostream>
 #include <string>
 

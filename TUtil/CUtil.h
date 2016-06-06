@@ -13,12 +13,12 @@
 
 #include "CLog.h"
 #include <Poco/Data/SessionPool.h>
-#include <redis/CRedisPool.h>
+#include "Taiji/TRedis/CRedisPool.h"
 #include <memory>
 #include <iostream>
 #include <memory>
 #include "CLogs.h"
-#include "Taiji/Except/Except.h"
+#include "Taiji/TExcept/Except.h"
 
 
 namespace Taiji {
@@ -115,11 +115,11 @@ public:
      * @param millisecond　如果所有链接都忙的话那么允许等待的最大的秒数。
      * @return 	返回一个可用的链接对象地址。
      */
-     Redis::CRedisPool::Handle getRedis(long millisecond );
+     TRedis::CRedisPool::Handle getRedis(long millisecond );
 
 private:
     CUtil() = default;
-    std::shared_ptr<Redis::CRedisPool> _pRedisPool = nullptr;
+    std::shared_ptr<TRedis::CRedisPool> _pRedisPool = nullptr;
     std::shared_ptr<Poco::Data::SessionPool> _pSessionPool = nullptr;
     std::shared_ptr<CLogs> _logs = nullptr;
 

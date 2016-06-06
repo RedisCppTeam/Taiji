@@ -15,7 +15,7 @@
 #include "Taiji/TUtil/CUtil.h"
 
 using namespace Taiji::TUtil;
-using namespace Taiji::Redis;
+using namespace Taiji::TRedis;
 
 
 using Poco::Data::Keywords::now;

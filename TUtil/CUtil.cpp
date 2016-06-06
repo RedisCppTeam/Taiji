@@ -75,7 +75,7 @@ void CUtil::__uninitMysql()
 
 void CUtil::initRedis( const std::string& host, uint16_t port, uint16_t maxSession )
 {
-    _pRedisPool = std::shared_ptr<Redis::CRedisPool>( new Redis::CRedisPool );
+    _pRedisPool = std::shared_ptr<TRedis::CRedisPool>( new TRedis::CRedisPool );
     _pRedisPool->init( host, port,0,maxSession,5 );
 }
 
@@ -87,7 +87,7 @@ void CUtil::__uninitRedis()
     }
 }
 
-Redis::CRedisPool::Handle CUtil::getRedis( long millisecond )
+TRedis::CRedisPool::Handle CUtil::getRedis( long millisecond )
 {
     return( _pRedisPool->getRedis( millisecond ) );
 }

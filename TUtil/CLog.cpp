@@ -89,7 +89,7 @@ void CLog::initLog(const std::string& dir, const std::string& file, const std::s
         //每条日志的格式。
         Poco::AutoPtr<Poco::PatternFormatter> patternFormatter(
                                 new Poco::PatternFormatter());
-        patternFormatter->setProperty("pattern", "%L%Y-%m-%d %H:%M:%S %s(%p): %t");
+        patternFormatter->setProperty("pattern", "%L%Y-%m-%d %H:%M:%S (%p): %t");
 
         //初始化　Channel
         channel = new Poco::FormattingChannel(patternFormatter, fileChannel);
