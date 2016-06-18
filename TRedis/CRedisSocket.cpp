@@ -90,9 +90,9 @@ void CRedisSocket::readN(const uint64_t n, string& data )
 
 void CRedisSocket::clearBuffer( void )
 {
-   _pNext = _pBuffer;
-   _pEnd = _pBuffer;
-   _flushSocketRecvBuff();
+    _pNext = _pBuffer;
+    _pEnd = _pBuffer;
+    _flushSocketRecvBuff();
 }
 
 //----------------------------------------------protected----------------------------------------------------
@@ -122,32 +122,16 @@ void CRedisSocket::_refill()
 
 void CRedisSocket::_flushSocketRecvBuff()
 {
-    struct timeval timeout;
-    timeout.tv_sec = 0;
-    timeout.tv_usec = 0;
+    Poco::Net::Socket::SocketList readList = {*(static_cast<Poco::Net::Socket *>(this))};
+    Poco::Net::Socket::SocketList writeList;
+    Poco::Net::Socket::SocketList exceptList;
+    Poco::Timespan timeout(0, 0);
+    char tmp[256];
+    while((Poco::Net::Socket::select(readList, writeList, exceptList, timeout) > 0)
+          && (this->receiveBytes(tmp, 256) > 0));
 
-    int fd = impl()->sockfd();
-
-    fd_set         fds;
-    FD_ZERO(&fds);
-    FD_SET( fd, &fds );
-
-    int nRet;
-    char tmp[1024];
-
-    memset(tmp, 0, sizeof(tmp));
-
-    while(1)
-    {
-        nRet= ::select(FD_SETSIZE, &fds, NULL, NULL, &timeout);
-        if(nRet <= 0)
-            break;
-
-        int count = recv(fd, tmp, 1024,0);
-        if ( count <= 0 )
-            break;
-    }
 }
+
 
 
 
