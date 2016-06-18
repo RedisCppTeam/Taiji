@@ -110,26 +110,29 @@ namespace TRedis {
 	}
 	_sendCommand( cmd );
 
-	_getReply( result );
+    _getReply( result );
+ }
+
+ void CRedisClient::subscribeStart(const VecString &channel)
+ {
+     Command cmd( "SUBSCRIBE" );
+     VecString::const_iterator it = channel.begin();
+     for ( ; it != channel.end(); ++it )
+     {
+         cmd << *it ;
+     }
+     _socket.setReceiveTimeout(0);
+     CResult result;
+     _getArry(cmd, result);
  }
 
 
- void CRedisClient::subscribe( VecString& channel, CResult& result )
+ string CRedisClient::subscribe()
  {
-	Command cmd( "SUBSCRIBE" );
-	VecString::const_iterator it = channel.begin();
-	for ( ; it != channel.end(); ++it )
-	{
-		cmd << *it ;
-	}
-	_socket.setReceiveTimeout(0);
-	result.clear();
-	_getArry( cmd, result );
-	while(true)
-	{
-		result.clear();
-		_getReply( result );
-	}
+     CResult result;
+     _getReply(result);
+     auto t = result.getArry().rbegin();
+     return *t;
  }
 
 

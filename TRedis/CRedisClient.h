@@ -1048,7 +1048,9 @@ public:
 
 	void punsubscribe( CResult& result, const VecString& pattern = VecString() );
 
-	void subscribe( VecString& channel , CResult& result );
+    void subscribeStart(const VecString& channel);
+
+    std::string subscribe();
 
 	void unsubscribe( CResult& result, const VecString& channel = VecString() );
 

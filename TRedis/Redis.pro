@@ -18,8 +18,11 @@ DEFINES += \
 INCLUDEPATH += ../../
 
 unix {
-    target.path = ../lib
+    target.path = /usr/local/lib
     INSTALLS += target
+    headfile.files = *.h
+    headfile.path = /usr/local/include/Taiji/TRedis
+    INSTALLS += headfile
 }
 
 HEADERS += \
