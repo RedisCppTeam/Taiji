@@ -42,10 +42,10 @@ TEST_F( CUtilUnitTest, Logs_test )
 
 
     CLog& log1 = CLogs::instance().getLog( "TEST_LOG" );
-    log1.information( ELogType::IN, typeid(*this).name(),__func__,"This is %s\n", std::string("test") );
+    log1.information( ELogType::IN, typeid(*this).name(),__func__, "", "","This is %s\n", std::string("test") );
 
     CLog& log2 = CLogs::instance().getLog( "TEST_LOG2" );
-    log2.information( ELogType::IN, typeid(*this).name(),__func__,"This is %s\n", std::string("test") );
+    log2.information( ELogType::IN, typeid(*this).name(),__func__,"mac", "12345678901","This is %s\n", std::string("test") );
 }
 
 
@@ -82,7 +82,7 @@ TEST_F( CUtilUnitTest, CUtil_Log )
 {
     CUtil::instance().createLog( "./log/","unitTest.log","UNIT_TEST_LOG" );
     CLog& log = CUtil::instance().getLog( "UNIT_TEST_LOG" );
-    log.information( ELogType::IN, typeid(*this).name(),__func__,"This is %s\n", std::string("test") );
+    log.information( ELogType::IN, typeid(*this).name(),__func__,"indexName", "indexValue","This is %s\n", std::string("test") );
 }
 
 

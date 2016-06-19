@@ -45,8 +45,8 @@ TAIJI_NEW_EXCEPTION( ExceptNullptr, ExceptLog )
 enum class ELogType
 {
     RECV = 0x01,						///<通过网络接受的原始数据
-    SEND,									///<通过网络发送的数据
-    IN										///<内部处理中的数据
+            SEND,									///<通过网络发送的数据
+            IN										///<内部处理中的数据
 };
 
 
@@ -61,6 +61,7 @@ class CLog
 public:
     //以下为字符串常量
     static const  std::string HEAD_FMT;						///< 默认的是日志头格式
+    static const  std::string HEAD_FMT_INDEX;						///< 默认的是日志头格式
     static const  std::string DEFAULT_LOG_ROTATION; 		///< 默认的日志文件更新时间
     static const  std::string DEFAULT_LOG_PURGEAGE;			///< 默认的日志文件保留时间
     static const  std::string DEFAULT_LOG_LEVEL;			///< 默认的日志输出等级
@@ -98,97 +99,96 @@ public:
                  const std::string &rotation=DEFAULT_LOG_ROTATION,
                  const std::string& purgeAge=DEFAULT_LOG_PURGEAGE );
 
-    void debug(ELogType type, const std::string&className, const std::string& func,
-                const std::string& fmt );
+    void debug(ELogType type, const std::string&className, const std::string& func, const std::string& indexName, const std::string& indexValue, const std::string& fmt);
 
-    void debug(ELogType type, const std::string&className, const std::string& func,
-                const std::string& fmt, const Poco::Any& value1 );
+    void debug(ELogType type, const std::string&className, const std::string& func, const std::string& indexName, const std::string& indexValue, const std::string& fmt,
+               const Poco::Any& value1);
 
-    void debug( ELogType type,const std::string&className,const std::string& func,
-                const std::string& fmt, const Poco::Any& value1, const Poco::Any& value2 );
+    void debug(ELogType type, const std::string&className, const std::string& func, const std::string& indexName, const std::string& indexValue, const std::string& fmt,
+               const Poco::Any& value1, const Poco::Any& value2);
 
-    void debug(ELogType type, const std::string&className, const std::string& func,
-               const std::string& fmt, const Poco::Any& value1, const Poco::Any& value2,
-               const Poco::Any& value3 );
+    void debug(ELogType type, const std::string&className, const std::string& func, const std::string& indexName, const std::string& indexValue, const std::string& fmt,
+               const Poco::Any& value1, const Poco::Any& value2, const Poco::Any& value3);
 
-    void debug(ELogType type, const std::string&className, const std::string& func,
-               const std::string& fmt, const Poco::Any& value1, const Poco::Any& value2,
-               const Poco::Any& value3,const Poco::Any& value4 );
-
-
-    void information(ELogType type, const std::string&className, const std::string& func,
-               const std::string& fmt );
-
-    void information(ELogType type, const std::string&className, const std::string& func,
-               const std::string& fmt, const Poco::Any& value1 );
-
-    void information( ELogType type,const std::string&className,const std::string& func,
-                const std::string& fmt, const Poco::Any& value1, const Poco::Any& value2 );
-
-    void information(ELogType type, const std::string&className, const std::string& func,
-               const std::string& fmt, const Poco::Any& value1, const Poco::Any& value2,
-               const Poco::Any& value3 );
-
-    void information(ELogType type, const std::string&className, const std::string& func,
-               const std::string& fmt, const Poco::Any& value1, const Poco::Any& value2,
-               const Poco::Any& value3, const Poco::Any& value4 );
+    void debug(ELogType type, const std::string&className, const std::string& func, const std::string& indexName, const std::string& indexValue, const std::string& fmt,
+               const Poco::Any& value1, const Poco::Any& value2, const Poco::Any& value3, const Poco::Any& value4);
 
 
 
-    void warning(ELogType type, const std::string&className, const std::string& func,
-               const std::string& fmt );
-
-    void warning(ELogType type, const std::string&className, const std::string& func,
-               const std::string& fmt, const Poco::Any& value1 );
-
-    void warning( ELogType type,const std::string&className,const std::string& func,
-                const std::string& fmt, const Poco::Any& value1, const Poco::Any& value2 );
-
-    void warning(ELogType type, const std::string&className, const std::string& func,
-               const std::string& fmt, const Poco::Any& value1, const Poco::Any& value2,
-               const Poco::Any& value3 );
-
-    void warning(ELogType type, const std::string&className, const std::string& func,
-               const std::string& fmt, const Poco::Any& value1, const Poco::Any& value2,
-               const Poco::Any& value3,const Poco::Any& value4 );
 
 
 
-    void error(ELogType type, const std::string&className, const std::string& func,
-               const std::string& fmt );
 
-    void error(ELogType type, const std::string&className, const std::string& func,
-               const std::string& fmt, const Poco::Any& value1 );
+    void information(ELogType type, const std::string&className, const std::string& func, const std::string& indexName, const std::string& indexValue, const std::string& fmt);
 
-    void error( ELogType type,const std::string&className,const std::string& func,
-                const std::string& fmt, const Poco::Any& value1, const Poco::Any& value2 );
+    void information(ELogType type, const std::string&className, const std::string& func, const std::string& indexName, const std::string& indexValue, const std::string& fmt,
+               const Poco::Any& value1);
 
-    void error(ELogType type, const std::string&className, const std::string& func,
-               const std::string& fmt, const Poco::Any& value1, const Poco::Any& value2,
-               const Poco::Any& value3 );
+    void information(ELogType type, const std::string&className, const std::string& func, const std::string& indexName, const std::string& indexValue, const std::string& fmt,
+               const Poco::Any& value1, const Poco::Any& value2);
 
-    void error(ELogType type, const std::string&className, const std::string& func,
-               const std::string& fmt, const Poco::Any& value1, const Poco::Any& value2,
-               const Poco::Any& value3,const Poco::Any& value4 );
+    void information(ELogType type, const std::string&className, const std::string& func, const std::string& indexName, const std::string& indexValue, const std::string& fmt,
+               const Poco::Any& value1, const Poco::Any& value2, const Poco::Any& value3);
+
+    void information(ELogType type, const std::string&className, const std::string& func, const std::string& indexName, const std::string& indexValue, const std::string& fmt,
+               const Poco::Any& value1, const Poco::Any& value2, const Poco::Any& value3, const Poco::Any& value4);
 
 
 
-    void fatal(ELogType type, const std::string&className, const std::string& func,
-               const std::string& fmt );
 
-    void fatal(ELogType type, const std::string&className, const std::string& func,
-               const std::string& fmt, const Poco::Any& value1 );
 
-    void fatal( ELogType type,const std::string&className,const std::string& func,
-                const std::string& fmt, const Poco::Any& value1, const Poco::Any& value2 );
+    void warning(ELogType type, const std::string&className, const std::string& func, const std::string& indexName, const std::string& indexValue, const std::string& fmt);
 
-    void fatal(ELogType type, const std::string&className, const std::string& func,
-               const std::string& fmt, const Poco::Any& value1, const Poco::Any& value2,
-               const Poco::Any& value3 );
+    void warning(ELogType type, const std::string&className, const std::string& func, const std::string& indexName, const std::string& indexValue, const std::string& fmt,
+               const Poco::Any& value1);
 
-    void fatal(ELogType type, const std::string&className, const std::string& func,
-               const std::string& fmt, const Poco::Any& value1, const Poco::Any& value2,
-               const Poco::Any& value3,const Poco::Any& value4 );
+    void warning(ELogType type, const std::string&className, const std::string& func, const std::string& indexName, const std::string& indexValue, const std::string& fmt,
+               const Poco::Any& value1, const Poco::Any& value2);
+
+    void warning(ELogType type, const std::string&className, const std::string& func, const std::string& indexName, const std::string& indexValue, const std::string& fmt,
+               const Poco::Any& value1, const Poco::Any& value2, const Poco::Any& value3);
+
+    void warning(ELogType type, const std::string&className, const std::string& func, const std::string& indexName, const std::string& indexValue, const std::string& fmt,
+               const Poco::Any& value1, const Poco::Any& value2, const Poco::Any& value3, const Poco::Any& value4);
+
+
+
+
+    void error(ELogType type, const std::string&className, const std::string& func, const std::string& indexName, const std::string& indexValue, const std::string& fmt);
+
+    void error(ELogType type, const std::string&className, const std::string& func, const std::string& indexName, const std::string& indexValue, const std::string& fmt,
+               const Poco::Any& value1);
+
+    void error(ELogType type, const std::string&className, const std::string& func, const std::string& indexName, const std::string& indexValue, const std::string& fmt,
+               const Poco::Any& value1, const Poco::Any& value2);
+
+    void error(ELogType type, const std::string&className, const std::string& func, const std::string& indexName, const std::string& indexValue, const std::string& fmt,
+               const Poco::Any& value1, const Poco::Any& value2, const Poco::Any& value3);
+
+    void error(ELogType type, const std::string&className, const std::string& func, const std::string& indexName, const std::string& indexValue, const std::string& fmt,
+               const Poco::Any& value1, const Poco::Any& value2, const Poco::Any& value3, const Poco::Any& value4);
+
+
+
+
+
+
+
+    void fatal(ELogType type, const std::string&className, const std::string& func, const std::string& indexName, const std::string& indexValue, const std::string& fmt);
+
+    void fatal(ELogType type, const std::string&className, const std::string& func, const std::string& indexName, const std::string& indexValue, const std::string& fmt,
+               const Poco::Any& value1);
+
+    void fatal(ELogType type, const std::string&className, const std::string& func, const std::string& indexName, const std::string& indexValue, const std::string& fmt,
+               const Poco::Any& value1, const Poco::Any& value2);
+
+    void fatal(ELogType type, const std::string&className, const std::string& func, const std::string& indexName, const std::string& indexValue, const std::string& fmt,
+               const Poco::Any& value1, const Poco::Any& value2, const Poco::Any& value3);
+
+    void fatal(ELogType type, const std::string&className, const std::string& func, const std::string& indexName, const std::string& indexValue, const std::string& fmt,
+               const Poco::Any& value1, const Poco::Any& value2, const Poco::Any& value3, const Poco::Any& value4);
+
+
 
 
 
@@ -203,17 +203,17 @@ private:
 
     //内部函数
 
-    void __getLogHead(ELogType type, const std::string &className, const std::string &func,std::string& head);
+    std::string __getLogHead(ELogType type, const std::string &className, const std::string &func,
+                             const std::string &indexName, const std::string &indexValue);
     /**
      * @brief __getRealFmt  获取加上头信息之后的 fmt
      * @param fmt [in]  原 fmt
      * @param realFmt [out] 加上头信息之后的 fmt
      */
-    inline void __getRealFmt( const std::string& fmt,std::string& realFmt )
+    inline std::string __getRealFmt( const std::string& fmt)
     {
         //要在日志以前插入日志头
-       realFmt += "%s";
-       realFmt += fmt;
+        return "%s" + fmt;
     }
 
 };

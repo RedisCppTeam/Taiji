@@ -9,14 +9,9 @@ LIBS += \
         -lgtest \
         -lgtest_main \
         -lpthread \
-
-LIBS += \
-        -L../../../lib \
         -lTaijiRedis \
         -lTaijiExcept
 
-INCLUDEPATH += \
-    ../../../
 
 
 HEADERS += \
@@ -30,6 +25,8 @@ HEADERS += \
     src/CTestSet.h \
     src/CTestSortedSet.h \
     src/CTestString.h \
+
+
 
 SOURCES += \
     src/CTestConnect.cpp \

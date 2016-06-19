@@ -38,10 +38,11 @@ namespace TUtil {
 
 
  //一些默认值常量
-const std::string CLog::HEAD_FMT			=		"[**%s**] [tid:%lu] [class:%s] [func:%s] MSG:";
+const std::string CLog::HEAD_FMT			  =		"[**%s**] [tid:%lu] [class:%s] [func:%s] MSG:";
+const std::string CLog::HEAD_FMT_INDEX		  =		"[**%s**] [tid:%lu] [class:%s] [func:%s] [%s:%s] MSG:";
 const std::string CLog::DEFAULT_LOG_ROTATION  =		"1 days";
-const std::string CLog::DEFAULT_LOG_PURGEAGE =		"1 months";
-const std::string CLog::DEFAULT_LOG_LEVEL			=		"information";
+const std::string CLog::DEFAULT_LOG_PURGEAGE  =		"1 months";
+const std::string CLog::DEFAULT_LOG_LEVEL	  =		"information";
 
 
 CLog::CLog(const std::string& dir, const std::string& file, const std::string& name ,
@@ -98,15 +99,212 @@ void CLog::initLog(const std::string& dir, const std::string& file, const std::s
     _pLog = &Poco::Logger::get( name );
 }
 
-
-
-void CLog::__getLogHead( ELogType type,const std::string& className,
-                                                                const std::string& func,std::string& head )
+void CLog::debug(ELogType type, const std::string &className, const std::string &func, const std::string &indexName, const std::string &indexValue, const std::string &fmt)
 {
+    _pLog->debug(__getRealFmt(fmt), __getLogHead(type, className, func, indexName, indexValue));
+
+}
+
+void CLog::debug(ELogType type, const std::string &className, const std::string &func, const std::string &indexName, const std::string &indexValue, const std::string &fmt,
+                 const Poco::Any& value1)
+{
+    _pLog->debug(__getRealFmt(fmt), __getLogHead(type, className, func, indexName, indexValue), value1);
+
+}
+
+void CLog::debug(ELogType type, const std::string &className, const std::string &func, const std::string &indexName, const std::string &indexValue, const std::string &fmt,
+                 const Poco::Any& value1, const Poco::Any& value2)
+{
+    _pLog->debug(__getRealFmt(fmt), __getLogHead(type, className, func, indexName, indexValue), value1, value2);
+
+}
+
+void CLog::debug(ELogType type, const std::string &className, const std::string &func, const std::string &indexName, const std::string &indexValue, const std::string &fmt,
+                 const Poco::Any& value1, const Poco::Any& value2, const Poco::Any& value3)
+{
+    _pLog->debug(__getRealFmt(fmt), __getLogHead(type, className, func, indexName, indexValue), value1, value2, value3);
+
+}
+
+void CLog::debug(ELogType type, const std::string &className, const std::string &func, const std::string &indexName, const std::string &indexValue, const std::string &fmt,
+                 const Poco::Any& value1, const Poco::Any& value2, const Poco::Any& value3, const Poco::Any& value4)
+{
+    _pLog->debug(__getRealFmt(fmt), __getLogHead(type, className, func, indexName, indexValue), value1, value2, value3, value4);
+
+}
+
+
+
+
+
+
+void CLog::information(ELogType type, const std::string &className, const std::string &func, const std::string &indexName, const std::string &indexValue, const std::string &fmt)
+{
+    _pLog->information(__getRealFmt(fmt), __getLogHead(type, className, func, indexName, indexValue));
+
+}
+
+void CLog::information(ELogType type, const std::string &className, const std::string &func, const std::string &indexName, const std::string &indexValue, const std::string &fmt,
+                 const Poco::Any& value1)
+{
+    _pLog->information(__getRealFmt(fmt), __getLogHead(type, className, func, indexName, indexValue), value1);
+
+}
+
+void CLog::information(ELogType type, const std::string &className, const std::string &func, const std::string &indexName, const std::string &indexValue, const std::string &fmt,
+                 const Poco::Any& value1, const Poco::Any& value2)
+{
+    _pLog->information(__getRealFmt(fmt), __getLogHead(type, className, func, indexName, indexValue), value1, value2);
+
+}
+
+void CLog::information(ELogType type, const std::string &className, const std::string &func, const std::string &indexName, const std::string &indexValue, const std::string &fmt,
+                 const Poco::Any& value1, const Poco::Any& value2, const Poco::Any& value3)
+{
+    _pLog->information(__getRealFmt(fmt), __getLogHead(type, className, func, indexName, indexValue), value1, value2, value3);
+
+}
+
+void CLog::information(ELogType type, const std::string &className, const std::string &func, const std::string &indexName, const std::string &indexValue, const std::string &fmt,
+                 const Poco::Any& value1, const Poco::Any& value2, const Poco::Any& value3, const Poco::Any& value4)
+{
+    _pLog->information(__getRealFmt(fmt), __getLogHead(type, className, func, indexName, indexValue), value1, value2, value3, value4);
+
+}
+
+
+
+
+
+void CLog::warning(ELogType type, const std::string &className, const std::string &func, const std::string &indexName, const std::string &indexValue, const std::string &fmt)
+{
+    _pLog->warning(__getRealFmt(fmt), __getLogHead(type, className, func, indexName, indexValue));
+
+}
+
+void CLog::warning(ELogType type, const std::string &className, const std::string &func, const std::string &indexName, const std::string &indexValue, const std::string &fmt,
+                 const Poco::Any& value1)
+{
+    _pLog->warning(__getRealFmt(fmt), __getLogHead(type, className, func, indexName, indexValue), value1);
+
+}
+
+void CLog::warning(ELogType type, const std::string &className, const std::string &func, const std::string &indexName, const std::string &indexValue, const std::string &fmt,
+                 const Poco::Any& value1, const Poco::Any& value2)
+{
+    _pLog->warning(__getRealFmt(fmt), __getLogHead(type, className, func, indexName, indexValue), value1, value2);
+
+}
+
+void CLog::warning(ELogType type, const std::string &className, const std::string &func, const std::string &indexName, const std::string &indexValue, const std::string &fmt,
+                 const Poco::Any& value1, const Poco::Any& value2, const Poco::Any& value3)
+{
+    _pLog->warning(__getRealFmt(fmt), __getLogHead(type, className, func, indexName, indexValue), value1, value2, value3);
+
+}
+
+void CLog::warning(ELogType type, const std::string &className, const std::string &func, const std::string &indexName, const std::string &indexValue, const std::string &fmt,
+                 const Poco::Any& value1, const Poco::Any& value2, const Poco::Any& value3, const Poco::Any& value4)
+{
+    _pLog->warning(__getRealFmt(fmt), __getLogHead(type, className, func, indexName, indexValue), value1, value2, value3, value4);
+
+}
+
+
+
+
+
+void CLog::error(ELogType type, const std::string &className, const std::string &func, const std::string &indexName, const std::string &indexValue, const std::string &fmt)
+{
+    _pLog->error(__getRealFmt(fmt), __getLogHead(type, className, func, indexName, indexValue));
+
+}
+
+void CLog::error(ELogType type, const std::string &className, const std::string &func, const std::string &indexName, const std::string &indexValue, const std::string &fmt,
+                 const Poco::Any& value1)
+{
+    _pLog->error(__getRealFmt(fmt), __getLogHead(type, className, func, indexName, indexValue), value1);
+
+}
+
+void CLog::error(ELogType type, const std::string &className, const std::string &func, const std::string &indexName, const std::string &indexValue, const std::string &fmt,
+                 const Poco::Any& value1, const Poco::Any& value2)
+{
+    _pLog->error(__getRealFmt(fmt), __getLogHead(type, className, func, indexName, indexValue), value1, value2);
+
+}
+
+void CLog::error(ELogType type, const std::string &className, const std::string &func, const std::string &indexName, const std::string &indexValue, const std::string &fmt,
+                 const Poco::Any& value1, const Poco::Any& value2, const Poco::Any& value3)
+{
+    _pLog->error(__getRealFmt(fmt), __getLogHead(type, className, func, indexName, indexValue), value1, value2, value3);
+
+}
+
+void CLog::error(ELogType type, const std::string &className, const std::string &func, const std::string &indexName, const std::string &indexValue, const std::string &fmt,
+                 const Poco::Any& value1, const Poco::Any& value2, const Poco::Any& value3, const Poco::Any& value4)
+{
+    _pLog->error(__getRealFmt(fmt), __getLogHead(type, className, func, indexName, indexValue), value1, value2, value3, value4);
+
+}
+
+
+
+
+
+
+
+void CLog::fatal(ELogType type, const std::string &className, const std::string &func, const std::string &indexName, const std::string &indexValue, const std::string &fmt)
+{
+    _pLog->fatal(__getRealFmt(fmt), __getLogHead(type, className, func, indexName, indexValue));
+
+}
+
+void CLog::fatal(ELogType type, const std::string &className, const std::string &func, const std::string &indexName, const std::string &indexValue, const std::string &fmt,
+                 const Poco::Any& value1)
+{
+    _pLog->fatal(__getRealFmt(fmt), __getLogHead(type, className, func, indexName, indexValue), value1);
+
+}
+
+void CLog::fatal(ELogType type, const std::string &className, const std::string &func, const std::string &indexName, const std::string &indexValue, const std::string &fmt,
+                 const Poco::Any& value1, const Poco::Any& value2)
+{
+    _pLog->fatal(__getRealFmt(fmt), __getLogHead(type, className, func, indexName, indexValue), value1, value2);
+
+}
+
+void CLog::fatal(ELogType type, const std::string &className, const std::string &func, const std::string &indexName, const std::string &indexValue, const std::string &fmt,
+                 const Poco::Any& value1, const Poco::Any& value2, const Poco::Any& value3)
+{
+    _pLog->fatal(__getRealFmt(fmt), __getLogHead(type, className, func, indexName, indexValue), value1, value2, value3);
+
+}
+
+void CLog::fatal(ELogType type, const std::string &className, const std::string &func, const std::string &indexName, const std::string &indexValue, const std::string &fmt,
+                 const Poco::Any& value1, const Poco::Any& value2, const Poco::Any& value3, const Poco::Any& value4)
+{
+    _pLog->fatal(__getRealFmt(fmt), __getLogHead(type, className, func, indexName, indexValue), value1, value2, value3, value4);
+
+}
+
+
+
+
+
+
+
+std::string CLog::__getLogHead(ELogType type, const std::string &className, const std::string &func,
+                               const std::string &indexName, const std::string &indexValue)
+{
+    if( nullptr == _pLog )
+    {
+        throw ExceptNullptr( "没有初始日志对象" );
+    }
     //获取类型的字符串
     std::string stype;
     switch ( type ) {
-    case ELogType::IN:				stype = "IN";	break;
+    case ELogType::IN:			stype = "IN";	break;
     case ELogType::RECV:		stype = "RECV";	break;
     case ELogType::SEND:		stype = "SEND";	break;
     default:
@@ -115,433 +313,17 @@ void CLog::__getLogHead( ELogType type,const std::string& className,
     //获取线程 id
     Poco::Thread::TID tid = Poco::Thread::currentTid();
     //获取日志头
-    Poco::format( head,HEAD_FMT, stype,tid,className,func );
-}
-
-void CLog::debug(ELogType type, const std::string&className, const std::string& func,
-                 const std::string& fmt )
-{
-    if( nullptr == _pLog )
-    {
-        throw ExceptNullptr( "没有初始日志对象" );
-    }
     std::string head;
-    __getLogHead( type,className,func,head );
-    //要在日志以前插入日志头
-    std::string realFmt;
-    __getRealFmt( fmt, realFmt );
-    _pLog->debug( realFmt, head );
-}
-
-
-
-void CLog::debug(ELogType type, const std::string&className, const std::string& func,
-                 const std::string& fmt, const Poco::Any& value1 )
-{
-    if( nullptr == _pLog )
+    if ("" != indexName)
     {
-        throw ExceptNullptr( "没有初始日志对象" );
+        Poco::format(head, HEAD_FMT_INDEX, stype, tid, className, func, indexName, indexValue);
     }
-    std::string head;
-    __getLogHead( type,className,func,head );
-    //要在日志以前插入日志头
-    std::string realFmt;
-    __getRealFmt( fmt, realFmt );
-    _pLog->debug( realFmt, head,value1 );
-}
-
-void CLog::debug(ELogType type, const std::string &className, const std::string &func,
-                 const std::string &fmt, const Poco::Any &value1, const Poco::Any &value2)
-{
-    if( nullptr == _pLog )
+    else
     {
-        throw ExceptNullptr( "没有初始日志对象" );
-    }
-    std::string head;
-    __getLogHead( type,className,func,head );
-    //要在日志以前插入日志头
-    std::string realFmt;
-    __getRealFmt( fmt, realFmt );
-    _pLog->debug( realFmt, head,value1, value2 );
-}
-
-void CLog::debug(ELogType type, const std::string &className, const std::string &func,
-                 const std::string &fmt, const Poco::Any &value1, const Poco::Any &value2,
-                 const Poco::Any &value3)
-{
-    if( nullptr == _pLog )
-    {
-        throw ExceptNullptr( "没有初始日志对象" );
+        Poco::format(head, HEAD_FMT, stype, tid, className, func);
     }
 
-    std::string head;
-    __getLogHead( type,className,func,head );
-    //要在日志以前插入日志头
-    std::string realFmt;
-    __getRealFmt( fmt, realFmt );
-    _pLog->debug( realFmt, head,value1, value2,value3 );
-}
-
-void CLog::debug(ELogType type, const std::string &className, const std::string &func,
-                 const std::string &fmt, const Poco::Any &value1, const Poco::Any &value2,
-                 const Poco::Any &value3,const Poco::Any &value4)
-{
-    if( nullptr == _pLog )
-    {
-        throw ExceptNullptr( "没有初始日志对象" );
-    }
-
-    std::string head;
-    __getLogHead( type,className,func,head );
-    //要在日志以前插入日志头
-    std::string realFmt;
-    __getRealFmt( fmt, realFmt );
-    _pLog->debug( realFmt, head,value1, value2,value3, value4 );
-}
-
-
-
-/////////////////////////////////////////// information //////////////////////////////////////////////////
-void CLog::information(ELogType type, const std::string &className, const std::string &func,
-                       const std::string &fmt )
-{
-    if( nullptr == _pLog )
-    {
-        throw ExceptNullptr( "没有初始日志对象" );
-    }
-
-       std::string head;
-    __getLogHead( type,className,func,head );
-    //要在日志以前插入日志头
-    std::string realFmt;
-    __getRealFmt( fmt, realFmt );
-    _pLog->information( realFmt, head );
-}
-
-void CLog::information(ELogType type, const std::string &className, const std::string &func,
-                       const std::string &fmt, const Poco::Any &value1)
-{
-    if( nullptr == _pLog )
-    {
-        throw ExceptNullptr( "没有初始日志对象" );
-    }
-
-       std::string head;
-    __getLogHead( type,className,func,head );
-    //要在日志以前插入日志头
-    std::string realFmt;
-    __getRealFmt( fmt, realFmt );
-    _pLog->information( realFmt, head,value1 );
-}
-
-void CLog::information(ELogType type, const std::string &className, const std::string &func,
-                       const std::string &fmt, const Poco::Any &value1, const Poco::Any &value2)
-{
-    if( nullptr == _pLog )
-    {
-        throw ExceptNullptr( "没有初始日志对象" );
-    }
-
-    std::string head;
-    __getLogHead( type,className,func,head );
-    //要在日志以前插入日志头
-    std::string realFmt;
-    __getRealFmt( fmt, realFmt );
-    _pLog->information( realFmt, head,value1, value2 );
-}
-
-void CLog::information(ELogType type, const std::string &className, const std::string &func,
-                       const std::string &fmt, const Poco::Any &value1, const Poco::Any &value2,
-                       const Poco::Any &value3)
-{
-    if( nullptr == _pLog )
-    {
-        throw ExceptNullptr( "没有初始日志对象" );
-    }
-
-    std::string head;
-    __getLogHead( type,className,func,head );
-    //要在日志以前插入日志头
-    std::string realFmt;
-    __getRealFmt( fmt, realFmt );
-    _pLog->information( realFmt, head,value1, value2, value3 );
-}
-
-
-void CLog::information(ELogType type, const std::string &className, const std::string &func,
-                       const std::string &fmt, const Poco::Any &value1, const Poco::Any &value2,
-                       const Poco::Any &value3, const Poco::Any &value4 )
-{
-    if( nullptr == _pLog )
-    {
-        throw ExceptNullptr( "没有初始日志对象" );
-    }
-
-    std::string head;
-    __getLogHead( type,className,func,head );
-    //要在日志以前插入日志头
-    std::string realFmt;
-    __getRealFmt( fmt, realFmt );
-    _pLog->information( realFmt, head,value1, value2, value3, value4 );
-}
-
-
-
-/////////////////////////////////////////////// warning ///////////////////////////////////////////////
-void CLog::warning(ELogType type, const std::string &className, const std::string &func,
-                       const std::string &fmt )
-{
-    if( nullptr == _pLog )
-    {
-        throw ExceptNullptr( "没有初始日志对象" );
-    }
-
-    std::string head;
-    __getLogHead( type,className,func,head );
-    //要在日志以前插入日志头
-    std::string realFmt;
-    __getRealFmt( fmt, realFmt );
-    _pLog->warning( realFmt, head );
-}
-
-
-void CLog::warning(ELogType type, const std::string &className, const std::string &func,
-                       const std::string &fmt, const Poco::Any &value1)
-{
-    if( nullptr == _pLog )
-    {
-        throw ExceptNullptr( "没有初始日志对象" );
-    }
-
-    std::string head;
-    __getLogHead( type,className,func,head );
-    //要在日志以前插入日志头
-    std::string realFmt;
-    __getRealFmt( fmt, realFmt );
-    _pLog->warning( realFmt, head,value1 );
-}
-
-
-
-void CLog::warning(ELogType type, const std::string &className, const std::string &func,
-                       const std::string &fmt, const Poco::Any &value1, const Poco::Any &value2 )
-{
-    if( nullptr == _pLog )
-    {
-        throw ExceptNullptr( "没有初始日志对象" );
-    }
-
-    std::string head;
-    __getLogHead( type,className,func,head );
-    //要在日志以前插入日志头
-    std::string realFmt;
-    __getRealFmt( fmt, realFmt );
-    _pLog->warning( realFmt, head,value1,value2 );
-}
-
-
-void CLog::warning(ELogType type, const std::string &className, const std::string &func,
-                       const std::string &fmt, const Poco::Any &value1, const Poco::Any &value2,
-                       const Poco::Any &value3 )
-{
-    if( nullptr == _pLog )
-    {
-        throw ExceptNullptr( "没有初始日志对象" );
-    }
-
-    std::string head;
-    __getLogHead( type,className,func,head );
-    //要在日志以前插入日志头
-    std::string realFmt;
-    __getRealFmt( fmt, realFmt );
-    _pLog->warning( realFmt, head,value1,value2, value3 );
-}
-
-void CLog::warning(ELogType type, const std::string &className, const std::string &func,
-                       const std::string &fmt, const Poco::Any &value1, const Poco::Any &value2,
-                       const Poco::Any &value3, const Poco::Any &value4 )
-{
-    if( nullptr == _pLog )
-    {
-        throw ExceptNullptr( "没有初始日志对象" );
-    }
-
-    std::string head;
-    __getLogHead( type,className,func,head );
-    //要在日志以前插入日志头
-    std::string realFmt;
-    __getRealFmt( fmt, realFmt );
-    _pLog->warning( realFmt, head,value1,value2, value3, value4 );
-}
-
-
-
-/////////////////////////////////////////////// error ///////////////////////////////////////////////
-void CLog::error(ELogType type, const std::string &className, const std::string &func,
-                       const std::string &fmt )
-{
-    if( nullptr == _pLog )
-    {
-        throw ExceptNullptr( "没有初始日志对象" );
-    }
-
-    std::string head;
-    __getLogHead( type,className,func,head );
-    //要在日志以前插入日志头
-    std::string realFmt;
-    __getRealFmt( fmt, realFmt );
-    _pLog->error( realFmt, head );
-}
-
-void CLog::error(ELogType type, const std::string &className, const std::string &func,
-                       const std::string &fmt, const Poco::Any &value1)
-{
-    if( nullptr == _pLog )
-    {
-        throw ExceptNullptr( "没有初始日志对象" );
-    }
-
-    std::string head;
-    __getLogHead( type,className,func,head );
-    //要在日志以前插入日志头
-    std::string realFmt;
-    __getRealFmt( fmt, realFmt );
-    _pLog->error( realFmt, head,value1 );
-}
-
-void CLog::error(ELogType type, const std::string &className, const std::string &func,
-                       const std::string &fmt, const Poco::Any &value1, const Poco::Any &value2 )
-{
-    if( nullptr == _pLog )
-    {
-        throw ExceptNullptr( "没有初始日志对象" );
-    }
-
-    std::string head;
-    __getLogHead( type,className,func,head );
-    //要在日志以前插入日志头
-    std::string realFmt;
-    __getRealFmt( fmt, realFmt );
-    _pLog->error( realFmt, head,value1,value2 );
-}
-
-void CLog::error(ELogType type, const std::string &className, const std::string &func,
-                       const std::string &fmt, const Poco::Any &value1, const Poco::Any &value2,
-                       const Poco::Any &value3 )
-{
-    if( nullptr == _pLog )
-    {
-        throw ExceptNullptr( "没有初始日志对象" );
-    }
-
-    std::string head;
-    __getLogHead( type,className,func,head );
-    //要在日志以前插入日志头
-    std::string realFmt;
-    __getRealFmt( fmt, realFmt );
-    _pLog->error( realFmt, head,value1,value2, value3 );
-}
-
-void CLog::error(ELogType type, const std::string &className, const std::string &func,
-                       const std::string &fmt, const Poco::Any &value1, const Poco::Any &value2,
-                       const Poco::Any &value3, const Poco::Any &value4 )
-{
-    if( nullptr == _pLog )
-    {
-        throw ExceptNullptr( "没有初始日志对象" );
-    }
-
-    std::string head;
-    __getLogHead( type,className,func,head );
-    //要在日志以前插入日志头
-    std::string realFmt;
-    __getRealFmt( fmt, realFmt );
-    _pLog->error( realFmt, head,value1,value2, value3, value4 );
-}
-
-
-
-/////////////////////////////////////////////// fatal ///////////////////////////////////////////////
-void CLog::fatal(ELogType type, const std::string &className, const std::string &func,
-                       const std::string &fmt )
-{
-    if( nullptr == _pLog )
-    {
-        throw ExceptNullptr( "没有初始日志对象" );
-    }
-
-    std::string head;
-    __getLogHead( type,className,func,head );
-    //要在日志以前插入日志头
-    std::string realFmt;
-    __getRealFmt( fmt, realFmt );
-    _pLog->fatal( realFmt, head );
-}
-
-void CLog::fatal(ELogType type, const std::string &className, const std::string &func,
-                       const std::string &fmt, const Poco::Any &value1)
-{
-    if( nullptr == _pLog )
-    {
-        throw ExceptNullptr( "没有初始日志对象" );
-    }
-
-    std::string head;
-    __getLogHead( type,className,func,head );
-    //要在日志以前插入日志头
-    std::string realFmt;
-    __getRealFmt( fmt, realFmt );
-    _pLog->fatal( realFmt, head,value1 );
-}
-
-void CLog::fatal(ELogType type, const std::string &className, const std::string &func,
-                       const std::string &fmt, const Poco::Any &value1, const Poco::Any &value2 )
-{
-    if( nullptr == _pLog )
-    {
-        throw ExceptNullptr( "没有初始日志对象" );
-    }
-
-    std::string head;
-    __getLogHead( type,className,func,head );
-    //要在日志以前插入日志头
-    std::string realFmt;
-    __getRealFmt( fmt, realFmt );
-    _pLog->fatal( realFmt, head,value1,value2 );
-}
-
-void CLog::fatal(ELogType type, const std::string &className, const std::string &func,
-                       const std::string &fmt, const Poco::Any &value1, const Poco::Any &value2,
-                       const Poco::Any &value3 )
-{
-    if( nullptr == _pLog )
-    {
-        throw ExceptNullptr( "没有初始日志对象" );
-    }
-
-    std::string head;
-    __getLogHead( type,className,func,head );
-    //要在日志以前插入日志头
-    std::string realFmt;
-    __getRealFmt( fmt, realFmt );
-    _pLog->fatal( realFmt, head,value1,value2, value3 );
-}
-
-void CLog::fatal(ELogType type, const std::string &className, const std::string &func,
-                       const std::string &fmt, const Poco::Any &value1, const Poco::Any &value2,
-                       const Poco::Any &value3, const Poco::Any &value4 )
-{
-    if( nullptr == _pLog )
-    {
-        throw ExceptNullptr( "没有初始日志对象" );
-    }
-
-    std::string head;
-    __getLogHead( type,className,func,head );
-    //要在日志以前插入日志头
-    std::string realFmt;
-    __getRealFmt( fmt, realFmt );
-    _pLog->fatal( realFmt, head,value1,value2, value3, value4 );
+    return head;
 }
 
 

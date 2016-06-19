@@ -336,23 +336,38 @@ CUtil.o: ../CUtil.cpp ../CUtil.h \
 ####### Install
 
 install_target: first FORCE
-	@test -d $(INSTALL_ROOT)/home/zxh/code/qt/Taiji/TUtil/../lib || mkdir -p $(INSTALL_ROOT)/home/zxh/code/qt/Taiji/TUtil/../lib
-	-$(INSTALL_PROGRAM) "$(TARGET)" "$(INSTALL_ROOT)/home/zxh/code/qt/Taiji/lib/$(TARGET)"
-	-$(SYMLINK) "$(TARGET)" "$(INSTALL_ROOT)/home/zxh/code/qt/Taiji/lib/$(TARGET0)"
-	-$(SYMLINK) "$(TARGET)" "$(INSTALL_ROOT)/home/zxh/code/qt/Taiji/lib/$(TARGET1)"
-	-$(SYMLINK) "$(TARGET)" "$(INSTALL_ROOT)/home/zxh/code/qt/Taiji/lib/$(TARGET2)"
+	@test -d $(INSTALL_ROOT)/usr/local/lib || mkdir -p $(INSTALL_ROOT)/usr/local/lib
+	-$(INSTALL_PROGRAM) "$(TARGET)" "$(INSTALL_ROOT)/usr/local/lib/$(TARGET)"
+	-$(SYMLINK) "$(TARGET)" "$(INSTALL_ROOT)/usr/local/lib/$(TARGET0)"
+	-$(SYMLINK) "$(TARGET)" "$(INSTALL_ROOT)/usr/local/lib/$(TARGET1)"
+	-$(SYMLINK) "$(TARGET)" "$(INSTALL_ROOT)/usr/local/lib/$(TARGET2)"
 
 uninstall_target: FORCE
-	-$(DEL_FILE) "$(INSTALL_ROOT)/home/zxh/code/qt/Taiji/lib/$(TARGET)" 
-	 -$(DEL_FILE) "$(INSTALL_ROOT)/home/zxh/code/qt/Taiji/lib/$(TARGET0)" 
-	 -$(DEL_FILE) "$(INSTALL_ROOT)/home/zxh/code/qt/Taiji/lib/$(TARGET1)" 
-	 -$(DEL_FILE) "$(INSTALL_ROOT)/home/zxh/code/qt/Taiji/lib/$(TARGET2)"
-	-$(DEL_DIR) $(INSTALL_ROOT)/home/zxh/code/qt/Taiji/TUtil/../lib/ 
+	-$(DEL_FILE) "$(INSTALL_ROOT)/usr/local/lib/$(TARGET)" 
+	 -$(DEL_FILE) "$(INSTALL_ROOT)/usr/local/lib/$(TARGET0)" 
+	 -$(DEL_FILE) "$(INSTALL_ROOT)/usr/local/lib/$(TARGET1)" 
+	 -$(DEL_FILE) "$(INSTALL_ROOT)/usr/local/lib/$(TARGET2)"
+	-$(DEL_DIR) $(INSTALL_ROOT)/usr/local/lib/ 
 
 
-install:  install_target  FORCE
+install_headfile: first FORCE
+	@test -d $(INSTALL_ROOT)/usr/local/include/Taiji/TUtil || mkdir -p $(INSTALL_ROOT)/usr/local/include/Taiji/TUtil
+	-$(INSTALL_FILE) /home/zxh/code/qt/Taiji/TUtil/CLog.h $(INSTALL_ROOT)/usr/local/include/Taiji/TUtil/
+	-$(INSTALL_FILE) /home/zxh/code/qt/Taiji/TUtil/CLogs.h $(INSTALL_ROOT)/usr/local/include/Taiji/TUtil/
+	-$(INSTALL_FILE) /home/zxh/code/qt/Taiji/TUtil/CParams.h $(INSTALL_ROOT)/usr/local/include/Taiji/TUtil/
+	-$(INSTALL_FILE) /home/zxh/code/qt/Taiji/TUtil/CUtil.h $(INSTALL_ROOT)/usr/local/include/Taiji/TUtil/
 
-uninstall: uninstall_target   FORCE
+uninstall_headfile: FORCE
+	-$(DEL_FILE) -r $(INSTALL_ROOT)/usr/local/include/Taiji/TUtil/CUtil.h
+	-$(DEL_FILE) -r $(INSTALL_ROOT)/usr/local/include/Taiji/TUtil/CParams.h
+	-$(DEL_FILE) -r $(INSTALL_ROOT)/usr/local/include/Taiji/TUtil/CLogs.h
+	-$(DEL_FILE) -r $(INSTALL_ROOT)/usr/local/include/Taiji/TUtil/CLog.h
+	-$(DEL_DIR) $(INSTALL_ROOT)/usr/local/include/Taiji/TUtil/ 
+
+
+install:  install_target install_headfile  FORCE
+
+uninstall: uninstall_target uninstall_headfile   FORCE
 
 FORCE:
 

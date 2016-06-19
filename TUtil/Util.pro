@@ -25,9 +25,14 @@ LIBS += \
         -lPocoData	\
 
 unix {
-    target.path = ../lib
+    target.path = /usr/local/lib
     INSTALLS += target
+    headfile.files = *.h
+    headfile.path = /usr/local/include/Taiji/TUtil
+    INSTALLS += headfile
 }
+
+
 
 HEADERS += \
     CLog.h \
